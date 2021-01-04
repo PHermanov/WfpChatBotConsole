@@ -69,5 +69,8 @@ namespace WfpBotConsole.DB
                 .OrderByDescending(c => c.Count)
                 .Take(top)
                 .ToListAsync();
+
+        public async Task<long[]> GetAllChatsIds()
+         => await _context.Players.Select(p => p.ChatId).Distinct().ToArrayAsync();
     }
 }

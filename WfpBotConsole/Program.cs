@@ -5,6 +5,7 @@ using Telegram.Bot.Types.Enums;
 using WfpBotConsole.DB;
 using WfpBotConsole.Commands;
 using FluentScheduler;
+using WfpBotConsole.Jobs;
 
 namespace WfpBotConsole
 {
@@ -17,6 +18,7 @@ namespace WfpBotConsole
         static void Main(string[] args)
         {
             ConfigureServices();
+            SetUpJobs();
 
             var me = client.GetMeAsync().Result;
             Console.WriteLine($"Bot started {me.Id} : {me.FirstName}");
@@ -27,6 +29,7 @@ namespace WfpBotConsole
             Console.ReadKey();
 
             client.StopReceiving();
+            Console.WriteLine("Bot stopped");
         }
 
         private static void ConfigureServices()
@@ -34,14 +37,19 @@ namespace WfpBotConsole
             context = new GameContext();
             repository = new GameRepository(context);
 
-            JobManager.Initialize();
-            //JobManager.AddJob()
-
             client = new TelegramBotClient("SECRET_CODE");
 
             client.OnMessage += Bot_OnMessage;
             client.OnReceiveError += Client_OnReceiveError;
             client.OnReceiveGeneralError += Client_OnReceiveGeneralError;
+        }
+
+        private static void SetUpJobs()
+        {
+            var getWinnerJob = new GetWinnerEverydayJob(repository, client);
+            JobManager.AddJob(getWinnerJob, s => s.ToRunEvery(1).Days().At(12, 0));
+            
+            JobManager.Initialize();
         }
 
         private static void Client_OnReceiveGeneralError(object sender, ReceiveGeneralErrorEventArgs e)
@@ -74,7 +82,7 @@ namespace WfpBotConsole
                 {
                     Console.WriteLine($"Received a command in chat {chatId}. {name} : {text}");
                     
-                    await Command.Parse(text).Execute(e.Message, client, repository);
+                    await Command.Parse(text).Execute(e.Message.Chat.Id, client, repository);
                 }
             }
         }
