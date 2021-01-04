@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Telegram.Bot;
-using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using WfpBotConsole.DB;
 using WfpBotConsole.Models;
@@ -10,10 +9,8 @@ namespace WfpBotConsole.Commands
 {
     public class WinnerTodayCommand : Command
     {
-        public override async Task Execute(Message message, ITelegramBotClient client, GameRepository repository)
+        public override async Task Execute(long chatId, ITelegramBotClient client, GameRepository repository)
         {
-            var chatId = message.Chat.Id;
-
             var todayResult = await repository.GetTodayResultAsync(chatId);
 
             if (todayResult != null)

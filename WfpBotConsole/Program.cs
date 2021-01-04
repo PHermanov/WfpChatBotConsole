@@ -4,6 +4,7 @@ using Telegram.Bot.Args;
 using Telegram.Bot.Types.Enums;
 using WfpBotConsole.DB;
 using WfpBotConsole.Commands;
+using FluentScheduler;
 
 namespace WfpBotConsole
 {
@@ -32,6 +33,9 @@ namespace WfpBotConsole
         {
             context = new GameContext();
             repository = new GameRepository(context);
+
+            JobManager.Initialize();
+            //JobManager.AddJob()
 
             client = new TelegramBotClient("SECRET_CODE");
 

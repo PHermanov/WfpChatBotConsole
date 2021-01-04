@@ -17,7 +17,7 @@ namespace WfpBotConsole.Commands
             { @"/month", new CurrentMonthTopWinnersCommand() }
         };
 
-        public abstract Task Execute(Message message, ITelegramBotClient client, GameRepository repository = null);
+        public abstract Task Execute(long chatId, ITelegramBotClient client, GameRepository repository = null);
 
         public static Command Parse(string name)
         {
