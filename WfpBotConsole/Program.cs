@@ -52,7 +52,7 @@ namespace WfpBotConsole
 
         static async void Bot_OnMessage(object sender, MessageEventArgs e)
         {
-            if (e.Message.Type == MessageType.Text && !string.IsNullOrWhiteSpace(e.Message.Text))
+            if (!e.Message.From.IsBot && e.Message.Type == MessageType.Text && !string.IsNullOrWhiteSpace(e.Message.Text))
             {
                 var chatId = e.Message.Chat.Id;
                 var name = e.Message.From.Username;
