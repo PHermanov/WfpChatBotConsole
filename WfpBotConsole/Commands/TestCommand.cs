@@ -10,6 +10,8 @@ namespace WfpBotConsole.Commands
         public override async Task Execute(long chatId, ITelegramBotClient client, GameRepository repository = null)
         {
             await client.SendTextMessageAsync(chatId, $"Хуест!", parseMode: ParseMode.Markdown);
+
+            // await client.SendStickerAsync(chatId, sticker: "D:\\yoba.wepb");
         }
     }
 }

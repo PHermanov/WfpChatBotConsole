@@ -12,33 +12,31 @@ namespace WfpBotConsole.Commands
         public override async Task Execute(long chatId, ITelegramBotClient client, GameRepository repository)
         {
             var todayResult = await repository.GetTodayResultAsync(chatId);
+            
+            var messageTemplate = Messages.TodayWinnerAlreadySet;
 
-            if (todayResult != null)
-            {
-                var msg = string.Format(Messages.TodayWinnerAlreadySet, todayResult.UserName);
-
-                await client.SendTextMessageAsync(chatId, msg, ParseMode.Markdown);
-            }
-            else
+            if (todayResult == null)
             {
                 var users = await repository.GetAllPlayersAsync(chatId);
-                
+
                 var newWinner = users[new Random().Next(users.Count)];
 
-                var gameResult = new GameResult() 
-                { 
+                messageTemplate = Messages.NewWinner;
+
+                todayResult = new GameResult()
+                {
                     ChatId = chatId,
                     UserId = newWinner.UserId,
                     UserName = newWinner.UserName,
                     PlayedAt = DateTime.Today
                 };
 
-                await repository.SaveGameResult(gameResult);
-
-                var msg = string.Format(Messages.NewWinner, newWinner.UserName);
-
-                await client.SendTextMessageAsync(chatId, msg, ParseMode.Markdown);
+                await repository.SaveGameResult(todayResult);
             }
+
+            var msg = string.Format(messageTemplate, todayResult.GetUserMention());
+
+            await client.SendTextMessageAsync(chatId, msg, ParseMode.Markdown);
         }
     }
 }

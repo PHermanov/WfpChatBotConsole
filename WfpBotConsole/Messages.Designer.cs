@@ -70,7 +70,7 @@ namespace WfpBotConsole {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Иииии *пидор дня* сегодня _@{0}_ !.
+        ///   Looks up a localized string similar to Иииии *пидор дня* сегодня {0} !.
         /// </summary>
         internal static string NewWinner {
             get {
@@ -79,7 +79,7 @@ namespace WfpBotConsole {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Сегодня уже играли, и *пидор* по прежнему _@{0}_ !.
+        ///   Looks up a localized string similar to Сегодня уже играли, и *пидор* по прежнему {0}  !.
         /// </summary>
         internal static string TodayWinnerAlreadySet {
             get {

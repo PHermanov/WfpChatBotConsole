@@ -121,10 +121,10 @@
     <value>Опа, новый Пидор в игре! Поприветствуем @{0} !</value>
   </data>
   <data name="NewWinner" xml:space="preserve">
-    <value>Иииии *пидор дня* сегодня _@{0}_ !</value>
+    <value>Иииии *пидор дня* сегодня {0} !</value>
   </data>
   <data name="TodayWinnerAlreadySet" xml:space="preserve">
-    <value>Сегодня уже играли, и *пидор* по прежнему _@{0}_ !</value>
+    <value>Сегодня уже играли, и *пидор* по прежнему {0}  !</value>
   </data>
   <data name="TopMonthWinners" xml:space="preserve">
     <value>*Топ {0} пидоров месяца!*</value>

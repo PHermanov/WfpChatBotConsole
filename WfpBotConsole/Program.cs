@@ -26,7 +26,7 @@ namespace WfpBotConsole
             client.StartReceiving();
 
             Console.WriteLine("Press any key to exit");
-            Console.ReadKey();
+            Console.ReadLine();
 
             client.StopReceiving();
             Console.WriteLine("Bot stopped");
@@ -48,7 +48,7 @@ namespace WfpBotConsole
         {
             var getWinnerJob = new GetWinnerEverydayJob(repository, client);
             JobManager.AddJob(getWinnerJob, s => s.ToRunEvery(1).Days().At(12, 0));
-            
+
             JobManager.Initialize();
         }
 
@@ -70,18 +70,25 @@ namespace WfpBotConsole
                 var name = e.Message.From.Username;
                 var text = e.Message.Text;
 
-                var newPlayer = await repository.CheckPlayer(chatId, e.Message.From.Id, e.Message.From.Username);
+                var userName = e.Message.From.Username;
+
+                if (string.IsNullOrWhiteSpace(userName))
+                {
+                    userName = e.Message.From.FirstName + " " + e.Message.From.LastName;
+                }
+
+                var newPlayer = await repository.CheckPlayer(chatId, e.Message.From.Id, userName);
 
                 if (newPlayer)
                 {
                     // await client.SendTextMessageAsync(chatId, string.Format(Messages.NewPlayerAdded, name));
                     Console.WriteLine(string.Format(Messages.NewPlayerAdded, name));
                 }
-
+                
                 if (text.StartsWith(@"/"))
                 {
                     Console.WriteLine($"Received a command in chat {chatId}. {name} : {text}");
-                    
+
                     await Command.Parse(text).Execute(e.Message.Chat.Id, client, repository);
                 }
             }
