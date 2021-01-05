@@ -2,6 +2,7 @@
 using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
 using WfpBotConsole.DB;
+using WfpBotConsole.Stickers;
 
 namespace WfpBotConsole.Commands
 {
@@ -11,7 +12,7 @@ namespace WfpBotConsole.Commands
         {
             await client.SendTextMessageAsync(chatId, $"Хуест!", parseMode: ParseMode.Markdown);
 
-            await client.SendStickerAsync(chatId, sticker: @"https://raw.githubusercontent.com/PHermanov/WfpChatBotConsole/main/WfpBotConsole/Stickers/yoba.webp");
+            await client.SendStickerAsync(chatId, sticker: StickerUrls.Yoba);
         }
     }
 }

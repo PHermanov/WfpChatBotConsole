@@ -21,12 +21,21 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
+    <Compile Update="Stickers\StickerUrls.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>StickerUrls.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Update="Messages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Stickers\StickerUrls.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>StickerUrls.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 
