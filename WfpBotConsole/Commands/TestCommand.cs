@@ -11,7 +11,7 @@ namespace WfpBotConsole.Commands
         {
             await client.SendTextMessageAsync(chatId, $"Хуест!", parseMode: ParseMode.Markdown);
 
-            // await client.SendStickerAsync(chatId, sticker: "D:\\yoba.wepb");
+            await client.SendStickerAsync(chatId, sticker: @"https://raw.githubusercontent.com/PHermanov/WfpChatBotConsole/main/WfpBotConsole/Stickers/yoba.webp");
         }
     }
 }
