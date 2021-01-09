@@ -46,7 +46,7 @@ namespace WfpBotConsole
             context = new GameContext();
             repository = new GameRepository(context);
 
-            client = new TelegramBotClient("SECRET_CODE");
+            client = new TelegramBotClient("1482710994:AAGlC18fAex8vwA-pg-Fr1CJhciRUBhtUFU");
 
             client.OnMessage += Bot_OnMessage;
             client.OnReceiveError += Client_OnReceiveError;

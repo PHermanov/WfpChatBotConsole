@@ -7,7 +7,7 @@ namespace WfpBotConsole.Commands
 {
     public abstract class Command
     {
-        private static readonly Dictionary<string, Command> _commands = new()
+        private static readonly Dictionary<string, Command> _commands = new Dictionary<string, Command>()
         {
             { @"/help", new HelpCommand() },
             { @"/test", new TestCommand() },
