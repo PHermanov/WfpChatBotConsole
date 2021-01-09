@@ -61,6 +61,15 @@ namespace WfpBotConsole {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to *Пидоры потеряшки:* {0}.
+        /// </summary>
+        internal static string MissedGames {
+            get {
+                return ResourceManager.GetString("MissedGames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Опа, новый Пидор в игре! Поприветствуем @{0} !.
         /// </summary>
         internal static string NewPlayerAdded {
