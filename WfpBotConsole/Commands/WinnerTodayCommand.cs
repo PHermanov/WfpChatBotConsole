@@ -1,10 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
 using WfpBotConsole.DB;
-using WfpBotConsole.Models;
-using WfpBotConsole.Stickers;
 
 namespace WfpBotConsole.Commands
 {
