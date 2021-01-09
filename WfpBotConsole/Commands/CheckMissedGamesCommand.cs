@@ -17,10 +17,10 @@ namespace WfpBotConsole.Commands
 
 			if (lastGame != default)
 			{
-				var gameDate = lastGame.PlayedAt;
+				var gameDate = lastGame.PlayedAt.AddDays(1);
 				var results = new List<string>();
 
-				while (gameDate.Date.AddDays(1) != DateTime.Today)
+				while (gameDate.Date != DateTime.Today)
 				{
 					var users = await repository.GetAllPlayersAsync(chatId);
 
@@ -35,6 +35,8 @@ namespace WfpBotConsole.Commands
 					});
 
 					results.Add($"*{gameDate:d}* - {newWinner.GetUserMention()}");
+
+					gameDate = gameDate.AddDays(1);
 				}
 
 				if (results.Any())
