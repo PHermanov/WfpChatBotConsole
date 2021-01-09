@@ -15,7 +15,8 @@ namespace WfpBotConsole.Commands
             { @"/today", new WinnerTodayCommand() },
             { @"/month", new CurrentMonthTopWinnersCommand() },
             { @"/yesterday", new WinnerYesterdayCommand() },
-            { @"/newwinner", new NewWinnerCommand() }
+            { @"/newwinner", new NewWinnerCommand() },
+            { @"/checkmissedgames", new CheckMissedGamesCommand() }
         };
 
         public abstract Task Execute(long chatId, ITelegramBotClient client, GameRepository repository = null);
