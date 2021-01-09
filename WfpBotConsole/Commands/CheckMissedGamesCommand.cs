@@ -15,7 +15,7 @@ namespace WfpBotConsole.Commands
 		{
 			var lastGame = await repository.GetLastPlayedGame(chatId);
 
-			if (lastGame != default)
+			if (lastGame != null)
 			{
 				var gameDate = lastGame.PlayedAt.AddDays(1);
 				var results = new List<string>();
