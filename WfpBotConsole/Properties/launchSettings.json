@@ -1,8 +1,8 @@
 {
-  "profiles": {
-    "WfpBotConsole": {
-      "commandName": "Project",
-      "workingDirectory": "D:\\Repo\\WfpChatBotConsole\\WfpBotConsole"
-    }
-  }
+	"profiles": {
+		"WfpBotConsole": {
+			"commandName": "Project",
+			"workingDirectory": "D:\\Projects\\WfpBotConsole\\WfpBotConsole"
+		}
+	}
 }
