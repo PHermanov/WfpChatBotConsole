@@ -6,6 +6,7 @@ using WfpBotConsole.DB;
 using WfpBotConsole.Commands;
 using FluentScheduler;
 using WfpBotConsole.Jobs;
+using System.IO;
 
 namespace WfpBotConsole
 {
@@ -46,7 +47,7 @@ namespace WfpBotConsole
             context = new GameContext();
             repository = new GameRepository(context);
 
-            client = new TelegramBotClient("SECRET_CODE");
+            client = new TelegramBotClient(File.ReadAllText("key.secret"));
 
             client.OnMessage += Bot_OnMessage;
             client.OnReceiveError += Client_OnReceiveError;
