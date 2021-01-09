@@ -20,7 +20,7 @@ namespace WfpBotConsole.Jobs
         {
             var allChatIds = await _repository.GetAllChatsIds();
 
-            var command = new WinnerTodayCommand();
+            var command = new NewWinnerCommand();
 
             for (int i = 0; i < allChatIds.Length; i++)
             {

@@ -124,9 +124,18 @@
     <value>Иииии *пидор дня* сегодня {0} !</value>
   </data>
   <data name="TodayWinnerAlreadySet" xml:space="preserve">
-    <value>Сегодня уже играли, и *пидор* по прежнему {0}  !</value>
+    <value>Повторяю, *пидор* сегодня {0}  !</value>
   </data>
   <data name="TopMonthWinners" xml:space="preserve">
     <value>*Топ {0} пидоров месяца!*</value>
+  </data>
+  <data name="WinnerForever" xml:space="preserve">
+    <value>Тащемта, он такой навсегда...</value>
+  </data>
+  <data name="WinnerNotSetYet" xml:space="preserve">
+    <value>Пока не знаю, дай подумать. Скоро определим.</value>
+  </data>
+  <data name="YesterdayWinner" xml:space="preserve">
+    <value>А вчера *пидором* был {0} !</value>
   </data>
 </root>

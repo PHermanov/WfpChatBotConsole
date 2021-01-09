@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Telegram.Bot;
-using Telegram.Bot.Types;
 using WfpBotConsole.DB;
 
 namespace WfpBotConsole.Commands
@@ -14,7 +13,9 @@ namespace WfpBotConsole.Commands
             { @"/test", new TestCommand() },
             { @"/showusers", new ShowUsersCommand() },
             { @"/today", new WinnerTodayCommand() },
-            { @"/month", new CurrentMonthTopWinnersCommand() }
+            { @"/month", new CurrentMonthTopWinnersCommand() },
+            { @"/yesterday", new WinnerYesterdayCommand() },
+            { @"/newwinner", new NewWinnerCommand() }
         };
 
         public abstract Task Execute(long chatId, ITelegramBotClient client, GameRepository repository = null);

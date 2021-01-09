@@ -25,11 +25,20 @@ namespace WfpBotConsole
 
             client.StartReceiving();
 
-            Console.WriteLine("Press any key to exit");
-            Console.ReadLine();
+            Console.WriteLine("Type exit to exit");
 
-            client.StopReceiving();
-            Console.WriteLine("Bot stopped");
+            while (true)
+            {
+                var input = Console.ReadLine();
+
+                if (input == "exit")
+                {
+                    client.StopReceiving();
+                    Console.WriteLine("Bot stopped");
+
+                    break;
+                }
+            }
         }
 
         private static void ConfigureServices()
@@ -84,7 +93,7 @@ namespace WfpBotConsole
                     // await client.SendTextMessageAsync(chatId, string.Format(Messages.NewPlayerAdded, name));
                     Console.WriteLine(string.Format(Messages.NewPlayerAdded, name));
                 }
-                
+
                 if (text.StartsWith(@"/"))
                 {
                     Console.WriteLine($"Received a command in chat {chatId}. {name} : {text}");

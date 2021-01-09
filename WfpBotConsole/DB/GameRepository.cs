@@ -51,6 +51,9 @@ namespace WfpBotConsole.DB
         public async Task<GameResult> GetTodayResultAsync(long chatId)
             => await _context.Results.FirstOrDefaultAsync(r => r.ChatId == chatId && r.PlayedAt.Date == DateTime.Today);
 
+        public async Task<GameResult> GetYesterdayResultAsync(long chatId)
+            => await _context.Results.FirstOrDefaultAsync(r => r.ChatId == chatId && r.PlayedAt.Date == DateTime.Today.AddDays(-1));
+
         public async Task SaveGameResult(GameResult result)
         {
             await _context.Results.AddAsync(result);

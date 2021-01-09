@@ -79,7 +79,7 @@ namespace WfpBotConsole {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Сегодня уже играли, и *пидор* по прежнему {0}  !.
+        ///   Looks up a localized string similar to Повторяю, *пидор* сегодня {0}  !.
         /// </summary>
         internal static string TodayWinnerAlreadySet {
             get {
@@ -93,6 +93,33 @@ namespace WfpBotConsole {
         internal static string TopMonthWinners {
             get {
                 return ResourceManager.GetString("TopMonthWinners", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Тащемта, он такой навсегда....
+        /// </summary>
+        internal static string WinnerForever {
+            get {
+                return ResourceManager.GetString("WinnerForever", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пока не знаю, дай подумать. Скоро определим..
+        /// </summary>
+        internal static string WinnerNotSetYet {
+            get {
+                return ResourceManager.GetString("WinnerNotSetYet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to А вчера *пидором* был {0} !.
+        /// </summary>
+        internal static string YesterdayWinner {
+            get {
+                return ResourceManager.GetString("YesterdayWinner", resourceCulture);
             }
         }
     }

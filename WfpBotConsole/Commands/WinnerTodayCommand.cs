@@ -4,6 +4,7 @@ using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
 using WfpBotConsole.DB;
 using WfpBotConsole.Models;
+using WfpBotConsole.Stickers;
 
 namespace WfpBotConsole.Commands
 {
@@ -12,31 +13,23 @@ namespace WfpBotConsole.Commands
         public override async Task Execute(long chatId, ITelegramBotClient client, GameRepository repository)
         {
             var todayResult = await repository.GetTodayResultAsync(chatId);
-            
-            var messageTemplate = Messages.TodayWinnerAlreadySet;
 
-            if (todayResult == null)
+            if (todayResult != null)
             {
-                var users = await repository.GetAllPlayersAsync(chatId);
+                await client.SendTextMessageAsync(chatId, string.Format(Messages.TodayWinnerAlreadySet, todayResult.GetUserMention()), ParseMode.Markdown);
+            }
+            else
+            {
+                await client.SendTextMessageAsync(chatId, Messages.WinnerNotSetYet, ParseMode.Markdown);
 
-                var newWinner = users[new Random().Next(users.Count)];
+                var yesterdayResult = await repository.GetYesterdayResultAsync(chatId);
 
-                messageTemplate = Messages.NewWinner;
-
-                todayResult = new GameResult()
+                if (yesterdayResult != null)
                 {
-                    ChatId = chatId,
-                    UserId = newWinner.UserId,
-                    UserName = newWinner.UserName,
-                    PlayedAt = DateTime.Today
-                };
-
-                await repository.SaveGameResult(todayResult);
+                    await client.SendTextMessageAsync(chatId, string.Format(Messages.YesterdayWinner, yesterdayResult.GetUserMention()), ParseMode.Markdown);
+                }
             }
 
-            var msg = string.Format(messageTemplate, todayResult.GetUserMention());
-
-            await client.SendTextMessageAsync(chatId, msg, ParseMode.Markdown);
         }
     }
 }
