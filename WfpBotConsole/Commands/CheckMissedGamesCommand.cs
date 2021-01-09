@@ -20,7 +20,7 @@ namespace WfpBotConsole.Commands
 				var gameDate = lastGame.PlayedAt.AddDays(1);
 				var results = new List<string>();
 
-				while (gameDate.Date != DateTime.Today)
+				while (gameDate.Date < DateTime.Today)
 				{
 					var users = await repository.GetAllPlayersAsync(chatId);
 
