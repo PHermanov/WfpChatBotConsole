@@ -38,7 +38,7 @@ namespace WfpBotConsole.Commands
             var msg = string.Format(messageTemplate, todayResult.GetUserMention());
 
             await client.SendTextMessageAsync(chatId, msg, ParseMode.Markdown);
-            await client.SendStickerAsync(chatId, StickerUrls.Yoba);
+            await client.SendStickerAsync(chatId, StickersSelector.SelectRandomFromSet(StickersSelector.SticketSet.Yoba));
         }
     }
 }

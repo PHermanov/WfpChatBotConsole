@@ -1,0 +1,3 @@
+﻿https://raw.githubusercontent.com/PHermanov/WfpChatBotConsole/main/WfpBotConsole/Stickers/yoba.webp
+https://raw.githubusercontent.com/PHermanov/WfpChatBotConsole/main/WfpBotConsole/Stickers/yobaLeft.webp
+https://raw.githubusercontent.com/PHermanov/WfpChatBotConsole/main/WfpBotConsole/Stickers/yobaSmug.webp

@@ -6,6 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Stickers\Yoba\YobaUrls.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Stickers\Yoba\YobaUrls.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FluentScheduler" Version="5.5.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.1">
@@ -21,11 +31,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
-    <Compile Update="Stickers\StickerUrls.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>StickerUrls.resx</DependentUpon>
-    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -33,14 +38,16 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Messages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Stickers\StickerUrls.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>StickerUrls.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Migrations\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Stickers\Yoba\yobaSmug.webp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
