@@ -57,7 +57,7 @@ namespace WfpBotConsole
         private static void SetUpJobs()
         {
             var getWinnerJob = new GetWinnerEverydayJob(repository, client);
-            JobManager.AddJob(getWinnerJob, s => s.ToRunEvery(1).Days().At(12, 20));
+            JobManager.AddJob(getWinnerJob, s => s.ToRunEvery(1).Days().At(12, 00));
 
             JobManager.Initialize();
         }

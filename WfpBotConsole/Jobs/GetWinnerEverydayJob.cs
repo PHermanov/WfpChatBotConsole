@@ -20,12 +20,12 @@ namespace WfpBotConsole.Jobs
 		{
 			var allChatIds = await _repository.GetAllChatsIds();
 
-			// var checkMissedGamesCommand = new CheckMissedGamesCommand();
+			var checkMissedGamesCommand = new CheckMissedGamesCommand();
 			var newWinnerCommand = new NewWinnerCommand();
 
 			for (int i = 0; i < allChatIds.Length; i++)
 			{
-				// await checkMissedGamesCommand.Execute(allChatIds[i], _client, _repository);
+				await checkMissedGamesCommand.Execute(allChatIds[i], _client, _repository);
 				await newWinnerCommand.Execute(allChatIds[i], _client, _repository);
 			}
 		}
