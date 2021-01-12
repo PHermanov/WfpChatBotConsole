@@ -45,8 +45,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Stickers\Yoba\yobaSmug.webp">
+    <None Update="Stickers\Frog\FrogUrls.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Stickers\Yoba\yobaSmug.webp">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
