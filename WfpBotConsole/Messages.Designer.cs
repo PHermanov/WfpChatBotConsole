@@ -106,6 +106,15 @@ namespace WfpBotConsole {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Среда мои чювачки!.
+        /// </summary>
+        internal static string WednesdayMyDudes {
+            get {
+                return ResourceManager.GetString("WednesdayMyDudes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Тащемта, он такой навсегда....
         /// </summary>
         internal static string WinnerForever {

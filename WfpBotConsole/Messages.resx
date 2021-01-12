@@ -132,6 +132,9 @@
   <data name="TopMonthWinners" xml:space="preserve">
     <value>*Топ {0} пидоров месяца!*</value>
   </data>
+  <data name="WednesdayMyDudes" xml:space="preserve">
+    <value>Среда мои чювачки!</value>
+  </data>
   <data name="WinnerForever" xml:space="preserve">
     <value>Тащемта, он такой навсегда...</value>
   </data>
