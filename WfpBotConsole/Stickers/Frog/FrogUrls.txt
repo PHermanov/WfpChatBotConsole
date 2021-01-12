@@ -1,1 +1,4 @@
-﻿
+﻿https://raw.githubusercontent.com/PHermanov/WfpChatBotConsole/main/WfpBotConsole/Stickers/Frog/Frog1.webp
+https://raw.githubusercontent.com/PHermanov/WfpChatBotConsole/main/WfpBotConsole/Stickers/Frog/frog2.webp
+https://raw.githubusercontent.com/PHermanov/WfpChatBotConsole/main/WfpBotConsole/Stickers/Frog/frog3.webp
+https://raw.githubusercontent.com/PHermanov/WfpChatBotConsole/main/WfpBotConsole/Stickers/Frog/frog4.webp
