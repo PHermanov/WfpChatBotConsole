@@ -8,7 +8,8 @@ namespace WfpBotConsole.Stickers
 	{
 		public enum SticketSet : short
 		{
-			Yoba
+			Yoba,
+			Frog
 		}
 
 		public static string SelectRandomFromSet(SticketSet stickerSet)
@@ -16,6 +17,7 @@ namespace WfpBotConsole.Stickers
 			var fileName = stickerSet switch
 			{
 				SticketSet.Yoba => Path.Combine("Stickers", "Yoba", "YobaUrls.txt"),
+				SticketSet.Frog => Path.Combine("Stickers", "Frog", "FrogUrls.txt"),
 				_ => string.Empty
 			};
 
