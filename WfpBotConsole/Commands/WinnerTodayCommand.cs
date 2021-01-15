@@ -5,28 +5,48 @@ using WfpBotConsole.DB;
 
 namespace WfpBotConsole.Commands
 {
-    public class WinnerTodayCommand : Command
-    {
-        public override async Task Execute(long chatId, ITelegramBotClient client, GameRepository repository)
-        {
-            var todayResult = await repository.GetTodayResultAsync(chatId);
+	public class WinnerTodayCommand : Command
+	{
+		public enum Language
+		{
+			Ru,
+			Ukr
+		}
 
-            if (todayResult != null)
-            {
-                await client.TrySendTextMessageAsync(chatId, string.Format(Messages.TodayWinnerAlreadySet, todayResult.GetUserMention()), ParseMode.Markdown);
-            }
-            else
-            {
-                await client.TrySendTextMessageAsync(chatId, Messages.WinnerNotSetYet, ParseMode.Markdown);
+		private Language Lang { get; set; } = Language.Ru;
 
-                var yesterdayResult = await repository.GetYesterdayResultAsync(chatId);
+		public WinnerTodayCommand(Language lang)
+		{
+			Lang = lang;
+		}
 
-                if (yesterdayResult != null)
-                {
-                    await client.TrySendTextMessageAsync(chatId, string.Format(Messages.YesterdayWinner, yesterdayResult.GetUserMention()), ParseMode.Markdown);
-                }
-            }
+		public override async Task Execute(long chatId, ITelegramBotClient client, GameRepository repository)
+		{
+			var todayResult = await repository.GetTodayResultAsync(chatId);
 
-        }
-    }
+			if (todayResult != null)
+			{
+				var message = Lang switch
+				{
+					Language.Ru => Messages.TodayWinnerAlreadySet,
+					Language.Ukr => Messages.TodayWinnerAlreadySetUkr,
+					_ => throw new System.NotImplementedException()
+				};
+
+				await client.TrySendTextMessageAsync(chatId, string.Format(message, todayResult.GetUserMention()), ParseMode.Markdown);
+			}
+			else
+			{
+				await client.TrySendTextMessageAsync(chatId, Messages.WinnerNotSetYet, ParseMode.Markdown);
+
+				var yesterdayResult = await repository.GetYesterdayResultAsync(chatId);
+
+				if (yesterdayResult != null)
+				{
+					await client.TrySendTextMessageAsync(chatId, string.Format(Messages.YesterdayWinner, yesterdayResult.GetUserMention()), ParseMode.Markdown);
+				}
+			}
+
+		}
+	}
 }

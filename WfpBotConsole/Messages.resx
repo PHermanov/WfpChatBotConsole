@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Help" xml:space="preserve">
+    <value>Шо нада?</value>
+  </data>
   <data name="MissedGames" xml:space="preserve">
     <value>*Пидоры потеряшки:* {0}</value>
   </data>
@@ -128,6 +131,9 @@
   </data>
   <data name="TodayWinnerAlreadySet" xml:space="preserve">
     <value>Повторяю, *пидор* сегодня {0}  !</value>
+  </data>
+  <data name="TodayWinnerAlreadySetUkr" xml:space="preserve">
+    <value>Куме, а чув як сьогодні {0} називають? *Піііііііііііііідор*</value>
   </data>
   <data name="TopMonthWinners" xml:space="preserve">
     <value>*Топ {0} пидоров месяца!*</value>

@@ -12,11 +12,12 @@ namespace WfpBotConsole.Commands
 			{ @"/help", new HelpCommand() },
 			{ @"/test", new TestCommand() },
 			{ @"/showusers", new ShowUsersCommand() },
-			{ @"/today", new WinnerTodayCommand() },
+			{ @"/today", new WinnerTodayCommand(WinnerTodayCommand.Language.Ru) },
 			{ @"/month", new CurrentMonthTopWinnersCommand() },
 			{ @"/yesterday", new WinnerYesterdayCommand() },
 			{ @"/newwinner", new NewWinnerCommand() },
-			{ @"/checkmissedgames", new CheckMissedGamesCommand() }
+			{ @"/checkmissedgames", new CheckMissedGamesCommand() },
+			{ @"/сьогодні", new WinnerTodayCommand(WinnerTodayCommand.Language.Ukr) }
 		};
 
 		public abstract Task Execute(long chatId, ITelegramBotClient client, GameRepository repository = null);

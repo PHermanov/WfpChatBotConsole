@@ -61,6 +61,15 @@ namespace WfpBotConsole {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Шо нада?.
+        /// </summary>
+        internal static string Help {
+            get {
+                return ResourceManager.GetString("Help", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to *Пидоры потеряшки:* {0}.
         /// </summary>
         internal static string MissedGames {
@@ -93,6 +102,15 @@ namespace WfpBotConsole {
         internal static string TodayWinnerAlreadySet {
             get {
                 return ResourceManager.GetString("TodayWinnerAlreadySet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Куме, а чув як сьогодні {0} називають? *Піііііііііііііідор*.
+        /// </summary>
+        internal static string TodayWinnerAlreadySetUkr {
+            get {
+                return ResourceManager.GetString("TodayWinnerAlreadySetUkr", resourceCulture);
             }
         }
         
