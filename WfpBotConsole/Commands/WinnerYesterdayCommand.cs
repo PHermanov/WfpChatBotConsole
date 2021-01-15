@@ -15,8 +15,8 @@ namespace WfpBotConsole.Commands
             {
                 var msg = string.Format(Messages.YesterdayWinner, yesterdayResult.GetUserMention());
 
-                await client.SendTextMessageAsync(chatId, msg, ParseMode.Markdown);
-                await client.SendTextMessageAsync(chatId, Messages.WinnerForever, ParseMode.Markdown);
+                await client.TrySendTextMessageAsync(chatId, msg, ParseMode.Markdown);
+                await client.TrySendTextMessageAsync(chatId, Messages.WinnerForever, ParseMode.Markdown);
             }
         }
     }

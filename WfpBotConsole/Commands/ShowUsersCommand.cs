@@ -12,7 +12,7 @@ namespace WfpBotConsole.Commands
 
             string msg = string.Join(';', users);
 
-            await client.SendTextMessageAsync(chatId, msg);
+            await client.TrySendTextMessageAsync(chatId, msg);
         }
     }
 }

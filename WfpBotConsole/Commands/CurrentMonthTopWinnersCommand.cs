@@ -17,7 +17,7 @@ namespace WfpBotConsole.Commands
             string msg = string.Format(Messages.TopMonthWinners, top) + Environment.NewLine
                 + string.Join(Environment.NewLine, winners);
 
-            await client.SendTextMessageAsync(chatId, msg, ParseMode.Markdown);
+            await client.TrySendTextMessageAsync(chatId, msg, ParseMode.Markdown);
         }
     }
 }

@@ -22,8 +22,8 @@ namespace WfpBotConsole.Jobs
 
 			for (int i = 0; i < allChatIds.Length; i++)
 			{
-				await _client.SendTextMessageAsync(allChatIds[i], Messages.WednesdayMyDudes);
-				await _client.SendStickerAsync(allChatIds[i], StickersSelector.SelectRandomFromSet(StickersSelector.SticketSet.Frog));
+				await _client.TrySendTextMessageAsync(allChatIds[i], Messages.WednesdayMyDudes);
+				await _client.TrySendStickerAsync(allChatIds[i], StickersSelector.SelectRandomFromSet(StickersSelector.SticketSet.Frog));
 			}
 		}
 	}

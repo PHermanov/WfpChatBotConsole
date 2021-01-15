@@ -67,11 +67,13 @@ namespace WfpBotConsole
 
 		private static void Client_OnReceiveGeneralError(object sender, ReceiveGeneralErrorEventArgs e)
 		{
+			Console.WriteLine(nameof(Client_OnReceiveGeneralError));
 			Console.WriteLine(e.Exception.Message);
 		}
 
 		private static void Client_OnReceiveError(object sender, ReceiveErrorEventArgs e)
 		{
+			Console.WriteLine(nameof(Client_OnReceiveError));
 			Console.WriteLine(e.ApiRequestException.Message);
 		}
 
@@ -94,7 +96,7 @@ namespace WfpBotConsole
 
 				if (newPlayer)
 				{
-					// await client.SendTextMessageAsync(chatId, string.Format(Messages.NewPlayerAdded, name));
+					// await client.TrySendTextMessageAsync(chatId, string.Format(Messages.NewPlayerAdded, name));
 					Console.WriteLine(string.Format(Messages.NewPlayerAdded, userName));
 				}
 

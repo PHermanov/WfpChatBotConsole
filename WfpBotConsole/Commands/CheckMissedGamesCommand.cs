@@ -42,7 +42,7 @@ namespace WfpBotConsole.Commands
 				if (results.Any())
 				{
 					var msg = string.Format(Messages.MissedGames, $"{Environment.NewLine}{string.Join(Environment.NewLine, results)}");
-					await client.SendTextMessageAsync(chatId, msg, ParseMode.Markdown);
+					await client.TrySendTextMessageAsync(chatId, msg, ParseMode.Markdown);
 				}
 			}
 		}

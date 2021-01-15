@@ -10,8 +10,8 @@ namespace WfpBotConsole.Commands
 	{
 		public override async Task Execute(long chatId, ITelegramBotClient client, GameRepository repository = null)
 		{
-			await client.SendTextMessageAsync(chatId, $"Хуест!", parseMode: ParseMode.Markdown);
-			await client.SendStickerAsync(chatId, StickersSelector.SelectRandomFromSet(StickersSelector.SticketSet.Frog));
+			await client.TrySendTextMessageAsync(chatId, $"Хуест!", parseMode: ParseMode.Markdown);
+			await client.TrySendStickerAsync(chatId, StickersSelector.SelectRandomFromSet(StickersSelector.SticketSet.Frog));
 		}
 	}
 }

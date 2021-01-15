@@ -13,17 +13,17 @@ namespace WfpBotConsole.Commands
 
             if (todayResult != null)
             {
-                await client.SendTextMessageAsync(chatId, string.Format(Messages.TodayWinnerAlreadySet, todayResult.GetUserMention()), ParseMode.Markdown);
+                await client.TrySendTextMessageAsync(chatId, string.Format(Messages.TodayWinnerAlreadySet, todayResult.GetUserMention()), ParseMode.Markdown);
             }
             else
             {
-                await client.SendTextMessageAsync(chatId, Messages.WinnerNotSetYet, ParseMode.Markdown);
+                await client.TrySendTextMessageAsync(chatId, Messages.WinnerNotSetYet, ParseMode.Markdown);
 
                 var yesterdayResult = await repository.GetYesterdayResultAsync(chatId);
 
                 if (yesterdayResult != null)
                 {
-                    await client.SendTextMessageAsync(chatId, string.Format(Messages.YesterdayWinner, yesterdayResult.GetUserMention()), ParseMode.Markdown);
+                    await client.TrySendTextMessageAsync(chatId, string.Format(Messages.YesterdayWinner, yesterdayResult.GetUserMention()), ParseMode.Markdown);
                 }
             }
 
