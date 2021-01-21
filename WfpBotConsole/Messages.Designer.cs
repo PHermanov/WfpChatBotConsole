@@ -97,7 +97,7 @@ namespace WfpBotConsole {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Праздники!.
+        ///   Looks up a localized string similar to *Праздники!*.
         /// </summary>
         internal static string TodayHolidays {
             get {
