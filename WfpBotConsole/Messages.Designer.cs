@@ -106,7 +106,7 @@ namespace WfpBotConsole {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Сегодня {0}, {1}.
+        ///   Looks up a localized string similar to Сегодня.
         /// </summary>
         internal static string TodayString {
             get {

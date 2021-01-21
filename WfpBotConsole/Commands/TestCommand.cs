@@ -26,12 +26,10 @@ namespace WfpBotConsole.Commands
 
 			var holidays = doc.DocumentNode.SelectNodes("//ul[contains(@class, 'first')]/li[contains(@class, 'block1')]").Select(li => "_" + li.InnerText + "_");
 
-			var culture = new System.Globalization.CultureInfo("ru-RU");
+			var todayFormatted = DateTime.Today.ToString("dddd, dd MMMM yyyy", new System.Globalization.CultureInfo("ru-RU"));
 
-			var todayDayName = culture.DateTimeFormat.GetDayName(DateTime.Today.DayOfWeek);
-			var todayFormatted = DateTime.Today.ToString(culture.DateTimeFormat.LongDatePattern);
-
-			var message = string.Format(Messages.TodayString, todayDayName, todayFormatted)
+			var message = Messages.TodayString 
+					+ todayFormatted
 					+ Environment.NewLine
 					+ Messages.TodayHolidays
 					+ Environment.NewLine
@@ -39,7 +37,7 @@ namespace WfpBotConsole.Commands
 
 			if (holidays.Any())
 			{
-				await client.TrySendTextMessageAsync(chatId, message);
+				await client.TrySendTextMessageAsync(chatId, message, ParseMode.Markdown);
 			}
 		}
 	}
