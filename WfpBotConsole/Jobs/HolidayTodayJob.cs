@@ -32,18 +32,19 @@ namespace WfpBotConsole.Jobs
 
 				var holidays = doc.DocumentNode.SelectNodes("//ul[contains(@class, 'first')]/li[contains(@class, 'block1')]").Select(li => "_" + li.InnerText + "_");
 
-				var todayFormatted = DateTime.Today.ToString("dddd, dd MMMM yyyy", new System.Globalization.CultureInfo("ru-RU")).ReplaceDigits();
-
-				var message = Messages.TodayString
-						+ todayFormatted
-						+ Environment.NewLine
-						+ Environment.NewLine
-						+ Messages.TodayHolidays
-						+ Environment.NewLine
-						+ string.Join(Environment.NewLine, holidays);
-
 				if (holidays.Any())
 				{
+					var todayFormatted = DateTime.Today.ToString("dddd, dd MMMM yyyy", new System.Globalization.CultureInfo("ru-RU")).ReplaceDigits();
+
+					var message = Messages.TodayString
+							+ todayFormatted
+							+ Environment.NewLine
+							+ Environment.NewLine
+							+ Messages.TodayHolidays
+							+ Environment.NewLine
+							+ string.Join(Environment.NewLine, holidays);
+
+
 					var allChatIds = await _repository.GetAllChatsIds();
 
 					for (int i = 0; i < allChatIds.Length; i++)

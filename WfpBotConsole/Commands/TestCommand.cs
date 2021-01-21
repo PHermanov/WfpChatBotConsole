@@ -19,28 +19,28 @@ namespace WfpBotConsole.Commands
 			
 			// await client.TrySendStickerAsync(chatId, StickersSelector.SelectRandomFromSet(StickersSelector.SticketSet.Frog));
 
-			using var webClient = new WebClient();
-			var html = await webClient.DownloadStringTaskAsync("https://kakoysegodnyaprazdnik.com/");
+			//using var webClient = new WebClient();
+			//var html = await webClient.DownloadStringTaskAsync("https://kakoysegodnyaprazdnik.com/");
 
-			var doc = new HtmlDocument();
-			doc.LoadHtml(html);
+			//var doc = new HtmlDocument();
+			//doc.LoadHtml(html);
 
-			var holidays = doc.DocumentNode.SelectNodes("//ul[contains(@class, 'first')]/li[contains(@class, 'block1')]").Select(li => "_" + li.InnerText + "_");
+			//var holidays = doc.DocumentNode.SelectNodes("//ul[contains(@class, 'first')]/li[contains(@class, 'block1')]").Select(li => "_" + li.InnerText + "_");
 
-			var todayFormatted = DateTime.Today.ToString("dddd, dd MMMM yyyy", new System.Globalization.CultureInfo("ru-RU")).ReplaceDigits();
+			//var todayFormatted = DateTime.Today.ToString("dddd, dd MMMM yyyy", new System.Globalization.CultureInfo("ru-RU")).ReplaceDigits();
 
-			var message = Messages.TodayString
-					+ todayFormatted
-					+ Environment.NewLine
-					+ Environment.NewLine
-					+ Messages.TodayHolidays
-					+ Environment.NewLine
-					+ string.Join(Environment.NewLine, holidays);
+			//var message = Messages.TodayString
+			//		+ todayFormatted
+			//		+ Environment.NewLine
+			//		+ Environment.NewLine
+			//		+ Messages.TodayHolidays
+			//		+ Environment.NewLine
+			//		+ string.Join(Environment.NewLine, holidays);
 
-			if (holidays.Any())
-			{
-				await client.TrySendTextMessageAsync(chatId, message, ParseMode.Markdown);
-			}
+			//if (holidays.Any())
+			//{
+			//	await client.TrySendTextMessageAsync(chatId, message, ParseMode.Markdown);
+			//}
 		}
 	}
 }
