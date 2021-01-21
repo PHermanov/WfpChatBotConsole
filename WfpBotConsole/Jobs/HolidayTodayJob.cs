@@ -37,6 +37,7 @@ namespace WfpBotConsole.Jobs
 				var message = Messages.TodayString
 						+ todayFormatted
 						+ Environment.NewLine
+						+ Environment.NewLine
 						+ Messages.TodayHolidays
 						+ Environment.NewLine
 						+ string.Join(Environment.NewLine, holidays);
