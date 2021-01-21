@@ -14,7 +14,7 @@ namespace WfpBotConsole
 {
 	public static class Extensions
 	{
-		private static Dictionary<char, string> digits = new Dictionary<char, string>()
+		private static readonly Dictionary<char, string> digits = new()
 		{
 			{'0', "\U00000030\U000020E3"},
 			{'1', "\U00000031\U000020E3"},
