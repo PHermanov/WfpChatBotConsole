@@ -130,7 +130,10 @@
     <value>Иииии *пидор дня* сегодня {0} !</value>
   </data>
   <data name="TodayHolidays" xml:space="preserve">
-    <value>*Праздники!*</value>
+    <value>*Праздники:*</value>
+  </data>
+  <data name="TodayString" xml:space="preserve">
+    <value>Сегодня {0}, {1}</value>
   </data>
   <data name="TodayWinnerAlreadySet" xml:space="preserve">
     <value>Повторяю, *пидор* сегодня {0}  !</value>
