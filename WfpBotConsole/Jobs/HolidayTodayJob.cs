@@ -34,10 +34,10 @@ namespace WfpBotConsole.Jobs
 				if (holidays.Any())
 				{
 					var allChatIds = await _repository.GetAllChatsIds();
+					var message = Messages.TodayHolidays + Environment.NewLine + string.Join(Environment.NewLine, holidays);
 
 					for (int i = 0; i < allChatIds.Length; i++)
 					{
-						var message = Messages.TodayHolidays + Environment.NewLine + string.Join(Environment.NewLine, holidays);
 						await _client.TrySendTextMessageAsync(allChatIds[i], message);
 					}
 				}
