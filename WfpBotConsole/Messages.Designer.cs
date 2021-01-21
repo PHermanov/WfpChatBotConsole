@@ -97,6 +97,15 @@ namespace WfpBotConsole {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Праздники!.
+        /// </summary>
+        internal static string TodayHolidays {
+            get {
+                return ResourceManager.GetString("TodayHolidays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Повторяю, *пидор* сегодня {0}  !.
         /// </summary>
         internal static string TodayWinnerAlreadySet {

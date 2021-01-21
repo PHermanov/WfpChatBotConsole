@@ -129,6 +129,9 @@
   <data name="NewWinner" xml:space="preserve">
     <value>Иииии *пидор дня* сегодня {0} !</value>
   </data>
+  <data name="TodayHolidays" xml:space="preserve">
+    <value>Праздники!</value>
+  </data>
   <data name="TodayWinnerAlreadySet" xml:space="preserve">
     <value>Повторяю, *пидор* сегодня {0}  !</value>
   </data>

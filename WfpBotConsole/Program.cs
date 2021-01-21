@@ -62,6 +62,9 @@ namespace WfpBotConsole
 			var wednesdayJob = new WednesdayJob(repository, client);
 			JobManager.AddJob(wednesdayJob, s => s.ToRunEvery(0).Weeks().On(DayOfWeek.Wednesday).At(11, 00));
 
+			var holidayJob = new HolidayTodayJob(repository, client);
+			JobManager.AddJob(holidayJob, s => s.ToRunEvery(0).Days().At(13, 30));
+
 			JobManager.Initialize();
 		}
 
