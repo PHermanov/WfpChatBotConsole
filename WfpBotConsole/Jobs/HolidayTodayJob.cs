@@ -24,7 +24,7 @@ namespace WfpBotConsole.Jobs
 			try
 			{
 				using var webClient = new WebClient();
-				var html = webClient.DownloadString("https://kakoysegodnyaprazdnik.com/");
+				var html = await webClient.DownloadStringTaskAsync("https://kakoysegodnyaprazdnik.com/");
 
 				var doc = new HtmlDocument();
 				doc.LoadHtml(html);
@@ -38,7 +38,6 @@ namespace WfpBotConsole.Jobs
 					for (int i = 0; i < allChatIds.Length; i++)
 					{
 						var message = Messages.TodayHolidays + Environment.NewLine + string.Join(Environment.NewLine, holidays);
-
 						await _client.TrySendTextMessageAsync(allChatIds[i], message);
 					}
 				}
