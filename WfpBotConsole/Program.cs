@@ -57,13 +57,13 @@ namespace WfpBotConsole
 		private static void SetUpJobs()
 		{
 			var getWinnerJob = new GetWinnerEverydayJob(repository, client);
-			JobManager.AddJob(getWinnerJob, s => s.ToRunEvery(1).Days().At(12, 00));
+			JobManager.AddJob(getWinnerJob, s => s.ToRunEvery(0).Days().At(12, 00));
 
 			var wednesdayJob = new WednesdayJob(repository, client);
 			JobManager.AddJob(wednesdayJob, s => s.ToRunEvery(0).Weeks().On(DayOfWeek.Wednesday).At(11, 00));
 
 			var holidayJob = new HolidayTodayJob(repository, client);
-			JobManager.AddJob(holidayJob, s => s.ToRunEvery(0).Days().At(13, 30));
+			JobManager.AddJob(holidayJob, s => s.ToRunEvery(0).Days().At(10, 30));
 
 			JobManager.Initialize();
 		}
