@@ -16,16 +16,16 @@ namespace WfpBotConsole
 	{
 		private static readonly Dictionary<char, string> digits = new()
 		{
-			{'0', "\U00000030\U000020E3"},
-			{'1', "\U00000031\U000020E3"},
-			{'2', "\U00000032\U000020E3"},
-			{'3', "\U00000033\U000020E3"},
-			{'4', "\U00000034\U000020E3"},
-			{'5', "\U00000035\U000020E3"},
-			{'6', "\U00000036\U000020E3"},
-			{'7', "\U00000037\U000020E3"},
-			{'8', "\U00000038\U000020E3"},
-			{'9', "\U00000039\U000020E3"}
+			{ '0', "\U00000030\U000020E3" },
+			{ '1', "\U00000031\U000020E3" },
+			{ '2', "\U00000032\U000020E3" },
+			{ '3', "\U00000033\U000020E3" },
+			{ '4', "\U00000034\U000020E3" },
+			{ '5', "\U00000035\U000020E3" },
+			{ '6', "\U00000036\U000020E3" },
+			{ '7', "\U00000037\U000020E3" },
+			{ '8', "\U00000038\U000020E3" },
+			{ '9', "\U00000039\U000020E3" }
 		};
 
 		public static async Task TrySendTextMessageAsync(this ITelegramBotClient client, ChatId chatId, string text, ParseMode parseMode = ParseMode.Default, bool disableWebPagePreview = false, bool disableNotification = false, int replyToMessageId = 0, IReplyMarkup replyMarkup = null, CancellationToken cancellationToken = default)
@@ -66,9 +66,7 @@ namespace WfpBotConsole
 			=> CreateUserMention(player.UserName, player.UserId);
 
 		public static string GetUserMention(this PlayerCountViewModel player)
-		{
-			return player.UserId > 0 ? CreateUserMention(player.UserName, player.UserId) : string.Empty;
-		}
+			=> CreateUserMention(player.UserName, player.UserId);
 
 		private static string CreateUserMention(string userName, int userId)
 			=> @$"[{userName}](tg://user?id={userId})";

@@ -55,13 +55,10 @@ namespace WfpBotConsole.DB
 			=> await _context.Results.FirstOrDefaultAsync(r => r.ChatId == chatId && r.PlayedAt.Date == DateTime.Today.AddDays(-1));
 
 		public async Task<GameResult> GetLastPlayedGame(long chatId)
-		{
-			return await _context
-				.Results
+			=> await _context.Results
 				.Where(r => r.ChatId == chatId)
 				.OrderByDescending(r => r.PlayedAt)
 				.FirstOrDefaultAsync();
-		}
 
 		public async Task SaveGameResult(GameResult result)
 		{
@@ -70,20 +67,16 @@ namespace WfpBotConsole.DB
 		}
 
 		public async Task<List<PlayerCountViewModel>> GetTopWinnersForMonth(long chatId, int top, DateTime date)
-		 => await _context.Results
-				.Where(r => r.ChatId == chatId && r.PlayedAt.Date.Year == date.Year && r.PlayedAt.Date.Month == date.Month)
-				.GroupBy(g => g.UserName, (userName, count)
-					=> new PlayerCountViewModel
-					{
-						UserName = userName,
-						Count = count.Count()
-					})
-				.OrderByDescending(c => c.Count)
-				.Take(top)
-				.ToListAsync();
+			=> await GetMonthResults(chatId, date).Take(top).ToListAsync();
 
 		public async Task<PlayerCountViewModel> GetWinnerForMonth(long chatId, DateTime date)
-		 => await _context.Results
+			=> await GetMonthResults(chatId, date).FirstOrDefaultAsync();
+
+		public async Task<long[]> GetAllChatsIds()
+		 => await _context.Players.Select(p => p.ChatId).Distinct().ToArrayAsync();
+
+		private IOrderedQueryable<PlayerCountViewModel> GetMonthResults(long chatId, DateTime date)
+			=> _context.Results
 				.Where(r => r.ChatId == chatId && r.PlayedAt.Date.Year == date.Year && r.PlayedAt.Date.Month == date.Month)
 				.GroupBy(g => new
 				{
@@ -96,10 +89,7 @@ namespace WfpBotConsole.DB
 					UserName = gr.Key.UserName,
 					Count = gr.Count()
 				})
-				.OrderByDescending(c => c.Count)
-				.FirstOrDefaultAsync();
+				.OrderByDescending(c => c.Count);
 
-		public async Task<long[]> GetAllChatsIds()
-		 => await _context.Players.Select(p => p.ChatId).Distinct().ToArrayAsync();
 	}
 }
