@@ -75,12 +75,29 @@ namespace WfpBotConsole.DB
 				.GroupBy(g => g.UserName, (userName, count)
 					=> new PlayerCountViewModel
 					{
-						Name = userName,
+						UserName = userName,
 						Count = count.Count()
 					})
 				.OrderByDescending(c => c.Count)
 				.Take(top)
 				.ToListAsync();
+
+		public async Task<PlayerCountViewModel> GetWinnerForMonth(long chatId, DateTime date)
+		 => await _context.Results
+				.Where(r => r.ChatId == chatId && r.PlayedAt.Date.Year == date.Year && r.PlayedAt.Date.Month == date.Month)
+				.GroupBy(g => new
+				{
+					g.UserName,
+					g.UserId
+				})
+				.Select(gr => new PlayerCountViewModel
+				{
+					UserId = gr.Key.UserId,
+					UserName = gr.Key.UserName,
+					Count = gr.Count()
+				})
+				.OrderByDescending(c => c.Count)
+				.FirstOrDefaultAsync();
 
 		public async Task<long[]> GetAllChatsIds()
 		 => await _context.Players.Select(p => p.ChatId).Distinct().ToArrayAsync();

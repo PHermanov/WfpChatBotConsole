@@ -65,6 +65,9 @@ namespace WfpBotConsole
 			var holidayJob = new HolidayTodayJob(repository, client);
 			JobManager.AddJob(holidayJob, s => s.ToRunEvery(0).Days().At(10, 30));
 
+			var monthWinnerJob = new MonthWinnerJob(repository, client);
+			JobManager.AddJob(monthWinnerJob, s => s.ToRunEvery(0).Months().OnTheLastDay().At(12, 05));
+
 			JobManager.Initialize();
 		}
 
