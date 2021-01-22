@@ -14,6 +14,8 @@ namespace WfpBotConsole.Jobs
 		private readonly GameRepository _repository;
 		private readonly ITelegramBotClient _client;
 
+		private const string DateFormat = "dddd, dd MMMM";
+
 		public HolidayTodayJob(GameRepository repository, ITelegramBotClient client)
 		{
 			_repository = repository;
@@ -34,7 +36,7 @@ namespace WfpBotConsole.Jobs
 
 				if (holidays.Any())
 				{
-					var todayFormatted = DateTime.Today.ToString("dddd, dd MMMM yyyy", new System.Globalization.CultureInfo("ru-RU")).ReplaceDigits();
+					var todayFormatted = DateTime.Today.ToString(DateFormat, new System.Globalization.CultureInfo("ru-RU")).ReplaceDigits();
 
 					var message = Messages.TodayString
 							+ todayFormatted
