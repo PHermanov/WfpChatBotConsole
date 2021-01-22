@@ -13,7 +13,7 @@ namespace WfpBotConsole.Commands
 	{
 		public override async Task Execute(long chatId, ITelegramBotClient client, GameRepository repository = null)
 		{
-			var lastGame = await repository.GetLastPlayedGame(chatId);
+			var lastGame = await repository.GetLastPlayedGameAsync(chatId);
 
 			if (lastGame != null)
 			{
@@ -26,7 +26,7 @@ namespace WfpBotConsole.Commands
 
 					var newWinner = users[new Random().Next(users.Count)];
 
-					await repository.SaveGameResult(new GameResult()
+					await repository.SaveGameResultAsync(new GameResult()
 					{
 						ChatId = chatId,
 						UserId = newWinner.UserId,

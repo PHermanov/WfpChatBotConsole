@@ -18,7 +18,7 @@ namespace WfpBotConsole.Jobs
 
 		public async void Execute()
 		{
-			var allChatIds = await _repository.GetAllChatsIds();
+			var allChatIds = await _repository.GetAllChatsIdsAsync();
 
 			var checkMissedGamesCommand = new CheckMissedGamesCommand();
 			var newWinnerCommand = new NewWinnerCommand();

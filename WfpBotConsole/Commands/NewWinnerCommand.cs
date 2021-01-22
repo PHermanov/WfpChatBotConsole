@@ -32,7 +32,7 @@ namespace WfpBotConsole.Commands
                     PlayedAt = DateTime.Today
                 };
 
-                await repository.SaveGameResult(todayResult);
+                await repository.SaveGameResultAsync(todayResult);
             }
 
             var msg = string.Format(messageTemplate, todayResult.GetUserMention());

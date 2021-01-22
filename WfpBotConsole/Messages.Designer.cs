@@ -61,6 +61,15 @@ namespace WfpBotConsole {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Все наши славные *пидоры*!.
+        /// </summary>
+        internal static string AllWinners {
+            get {
+                return ResourceManager.GetString("AllWinners", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Шо нада?.
         /// </summary>
         internal static string Help {

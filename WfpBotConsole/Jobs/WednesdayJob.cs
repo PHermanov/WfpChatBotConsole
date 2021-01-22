@@ -18,7 +18,7 @@ namespace WfpBotConsole.Jobs
 
 		public async void Execute()
 		{
-			var allChatIds = await _repository.GetAllChatsIds();
+			var allChatIds = await _repository.GetAllChatsIdsAsync();
 
 			for (int i = 0; i < allChatIds.Length; i++)
 			{

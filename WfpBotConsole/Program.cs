@@ -98,7 +98,7 @@ namespace WfpBotConsole
 					userName = e.Message.From.FirstName + " " + e.Message.From.LastName;
 				}
 
-				var newPlayer = await repository.CheckPlayer(chatId, e.Message.From.Id, userName);
+				var newPlayer = await repository.CheckPlayerAsync(chatId, e.Message.From.Id, userName);
 
 				if (newPlayer)
 				{

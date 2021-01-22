@@ -12,7 +12,7 @@ namespace WfpBotConsole.Commands
         {
             int top = 5;
 
-            var winners = await repository.GetTopWinnersForMonth(chatId, top, DateTime.Today);
+            var winners = await repository.GetTopWinnersForMonthAsync(chatId, top, DateTime.Today);
 
             string msg = string.Format(Messages.TopMonthWinners, top) + Environment.NewLine
                 + string.Join(Environment.NewLine, winners);

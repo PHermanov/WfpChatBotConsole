@@ -19,11 +19,11 @@ namespace WfpBotConsole.Jobs
 
 		public async void Execute()
 		{
-			var allChatIds = await _repository.GetAllChatsIds();
+			var allChatIds = await _repository.GetAllChatsIdsAsync();
 
 			for (int i = 0; i < allChatIds.Length; i++)
 			{
-				var monthWinner = await _repository.GetWinnerForMonth(allChatIds[i], DateTime.Today);
+				var monthWinner = await _repository.GetWinnerForMonthAsync(allChatIds[i], DateTime.Today);
 
 				if (monthWinner != null)
 				{
