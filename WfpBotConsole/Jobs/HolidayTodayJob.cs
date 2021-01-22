@@ -6,6 +6,8 @@ using WfpBotConsole.DB;
 using HtmlAgilityPack;
 using System.Net;
 using Telegram.Bot.Types.Enums;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace WfpBotConsole.Jobs
 {
@@ -26,13 +28,7 @@ namespace WfpBotConsole.Jobs
 		{
 			try
 			{
-				using var webClient = new WebClient();
-				var html = await webClient.DownloadStringTaskAsync("https://kakoysegodnyaprazdnik.com/");
-
-				var doc = new HtmlDocument();
-				doc.LoadHtml(html);
-
-				var holidays = doc.DocumentNode.SelectNodes("//ul[contains(@class, 'first')]/li[contains(@class, 'block1')]").Select(li => "_" + li.InnerText + "_");
+				var holidays = await GetHolidays();
 
 				if (holidays.Any())
 				{
@@ -41,8 +37,6 @@ namespace WfpBotConsole.Jobs
 					var message = Messages.TodayString
 							+ todayFormatted
 							+ Environment.NewLine
-							+ Environment.NewLine
-							+ Messages.TodayHolidays
 							+ Environment.NewLine
 							+ string.Join(Environment.NewLine, holidays);
 
@@ -60,6 +54,19 @@ namespace WfpBotConsole.Jobs
 				Console.WriteLine(ex.GetType());
 				Console.WriteLine(ex.Message);
 			}
+		}
+
+		private async Task<IEnumerable<string>> GetHolidays()
+		{
+			using var webClient = new WebClient();
+			var html = await webClient.DownloadStringTaskAsync("https://kakoysegodnyaprazdnik.com/");
+
+			var doc = new HtmlDocument();
+			doc.LoadHtml(html);
+
+			return doc.DocumentNode
+				.SelectNodes("//ul[contains(@class, 'first')]/li[contains(@class, 'block1')]")
+				.Select(li => $"\u25AA _{li.InnerText}_");
 		}
 	}
 }
