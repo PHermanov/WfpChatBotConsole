@@ -6,7 +6,7 @@ namespace WfpBotConsole.Commands
 {
     public class ShowUsersCommand : Command
     {
-        public override async Task Execute(long chatId, ITelegramBotClient client, GameRepository repository)
+        public override async Task Execute(long chatId, ITelegramBotClient client, IGameRepository repository)
         {
             var users = await repository.GetAllPlayersAsync(chatId);
 

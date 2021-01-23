@@ -7,7 +7,7 @@ namespace WfpBotConsole.Commands
 {
     public class WinnerYesterdayCommand : Command
     {
-        public override async Task Execute(long chatId, ITelegramBotClient client, GameRepository repository)
+        public override async Task Execute(long chatId, ITelegramBotClient client, IGameRepository repository)
         {
             var yesterdayResult = await repository.GetYesterdayResultAsync(chatId);
 

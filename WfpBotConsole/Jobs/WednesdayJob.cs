@@ -1,16 +1,17 @@
 ﻿using FluentScheduler;
+using System;
 using Telegram.Bot;
 using WfpBotConsole.DB;
 using WfpBotConsole.Stickers;
 
 namespace WfpBotConsole.Jobs
 {
-	public class WednesdayJob : IJob
+	public class WednesdayJob : IScheduleJob
 	{
-		private readonly GameRepository _repository;
+		private readonly IGameRepository _repository;
 		private readonly ITelegramBotClient _client;
 
-		public WednesdayJob(GameRepository repository, ITelegramBotClient client)
+		public WednesdayJob(IGameRepository repository, ITelegramBotClient client)
 		{
 			_repository = repository;
 			_client = client;
@@ -25,6 +26,11 @@ namespace WfpBotConsole.Jobs
 				await _client.TrySendTextMessageAsync(allChatIds[i], Messages.WednesdayMyDudes);
 				await _client.TrySendStickerAsync(allChatIds[i], StickersSelector.SelectRandomFromSet(StickersSelector.SticketSet.Frog));
 			}
+		}
+
+		public void Schedule()
+		{
+			JobManager.AddJob(this, s => s.ToRunEvery(0).Weeks().On(DayOfWeek.Wednesday).At(11, 00));
 		}
 	}
 }

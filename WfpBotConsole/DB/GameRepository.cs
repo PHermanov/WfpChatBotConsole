@@ -2,19 +2,18 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 using WfpBotConsole.Models;
 
 namespace WfpBotConsole.DB
 {
-	public class GameRepository
+	public class GameRepository : IGameRepository
 	{
-		private readonly GameContext _context;
+		private readonly IGameContext _gameContext;
 
-		public GameRepository(GameContext context)
+		public GameRepository(IGameContext context)
 		{
-			_context = context;
+			_gameContext = context;
 		}
 
 		public async Task<bool> CheckPlayerAsync(long chatId, int userId, string userName)
@@ -33,38 +32,38 @@ namespace WfpBotConsole.DB
 				UserName = userName
 			};
 
-			await _context.Players.AddAsync(newPlayer);
+			await _gameContext.Players.AddAsync(newPlayer);
 
-			await _context.SaveChangesAsync();
+			await _gameContext.SaveChangesAsync();
 
 			return true;
 		}
 
 		public async Task<List<Player>> GetAllPlayersAsync(long chatId)
-			=> await _context.Players.Where(p => p.ChatId == chatId).ToListAsync();
+			=> await _gameContext.Players.Where(p => p.ChatId == chatId).ToListAsync();
 
 		public async Task<Player> GetPlayerByUserIdAsync(long chatId, int userId)
-			=> await _context.Players.FirstOrDefaultAsync(p => p.ChatId == chatId && p.UserId == userId);
+			=> await _gameContext.Players.FirstOrDefaultAsync(p => p.ChatId == chatId && p.UserId == userId);
 
 		public async Task<Player> GetPlayerByUserNameAsync(long chatId, string userName)
-			=> await _context.Players.FirstOrDefaultAsync(p => p.ChatId == chatId && p.UserName == userName);
+			=> await _gameContext.Players.FirstOrDefaultAsync(p => p.ChatId == chatId && p.UserName == userName);
 
 		public async Task<GameResult> GetTodayResultAsync(long chatId)
-			=> await _context.Results.FirstOrDefaultAsync(r => r.ChatId == chatId && r.PlayedAt.Date == DateTime.Today);
+			=> await _gameContext.Results.FirstOrDefaultAsync(r => r.ChatId == chatId && r.PlayedAt.Date == DateTime.Today);
 
 		public async Task<GameResult> GetYesterdayResultAsync(long chatId)
-			=> await _context.Results.FirstOrDefaultAsync(r => r.ChatId == chatId && r.PlayedAt.Date == DateTime.Today.AddDays(-1));
+			=> await _gameContext.Results.FirstOrDefaultAsync(r => r.ChatId == chatId && r.PlayedAt.Date == DateTime.Today.AddDays(-1));
 
 		public async Task<GameResult> GetLastPlayedGameAsync(long chatId)
-			=> await _context.Results
+			=> await _gameContext.Results
 				.Where(r => r.ChatId == chatId)
 				.OrderByDescending(r => r.PlayedAt)
 				.FirstOrDefaultAsync();
 
 		public async Task SaveGameResultAsync(GameResult result)
 		{
-			await _context.Results.AddAsync(result);
-			await _context.SaveChangesAsync();
+			await _gameContext.Results.AddAsync(result);
+			await _gameContext.SaveChangesAsync();
 		}
 
 		public async Task<List<PlayerCountViewModel>> GetTopWinnersForMonthAsync(long chatId, int top, DateTime date)
@@ -74,13 +73,13 @@ namespace WfpBotConsole.DB
 			=> await GetMonthResults(chatId, date).FirstOrDefaultAsync();
 
 		public async Task<long[]> GetAllChatsIdsAsync()
-			=> await _context.Players.Select(p => p.ChatId).Distinct().ToArrayAsync();
+			=> await _gameContext.Players.Select(p => p.ChatId).Distinct().ToArrayAsync();
 
 		public async Task<List<PlayerCountViewModel>> GetAllWinnersAsync(long chatId)
-			=> await _context.Results.Where(r => r.ChatId == chatId).ApplyGroupping().ToListAsync();
+			=> await _gameContext.Results.Where(r => r.ChatId == chatId).ApplyGroupping().ToListAsync();
 
 		private IOrderedQueryable<PlayerCountViewModel> GetMonthResults(long chatId, DateTime date)
-			=> _context.Results
+			=> _gameContext.Results
 				.Where(r => r.ChatId == chatId && r.PlayedAt.Date.Year == date.Year && r.PlayedAt.Date.Month == date.Month)
 				.ApplyGroupping();
 

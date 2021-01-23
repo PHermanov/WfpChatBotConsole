@@ -9,7 +9,7 @@ namespace WfpBotConsole.Commands
 {
 	public class AllWinnersCommand : Command
     {
-        public override async Task Execute(long chatId, ITelegramBotClient client, GameRepository repository)
+        public override async Task Execute(long chatId, ITelegramBotClient client, IGameRepository repository)
         {
             var allWinners = await repository.GetAllWinnersAsync(chatId);
 

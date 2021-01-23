@@ -5,12 +5,12 @@ using WfpBotConsole.DB;
 
 namespace WfpBotConsole.Jobs
 {
-	public class GetWinnerEverydayJob : IJob
+	public class GetWinnerEverydayJob : IScheduleJob
 	{
-		private readonly GameRepository _repository;
+		private readonly IGameRepository _repository;
 		private readonly ITelegramBotClient _client;
 
-		public GetWinnerEverydayJob(GameRepository repository, ITelegramBotClient client)
+		public GetWinnerEverydayJob(IGameRepository repository, ITelegramBotClient client)
 		{
 			_repository = repository;
 			_client = client;
@@ -28,6 +28,11 @@ namespace WfpBotConsole.Jobs
 				await checkMissedGamesCommand.Execute(allChatIds[i], _client, _repository);
 				await newWinnerCommand.Execute(allChatIds[i], _client, _repository);
 			}
+		}
+
+		public void Schedule()
+		{
+			JobManager.AddJob(this, s => s.ToRunEvery(0).Days().At(12, 00));
 		}
 	}
 }
