@@ -15,7 +15,9 @@ namespace WfpBotConsole.Jobs
 		public void ScheduleJobs()
 		{
 			foreach (var job in _jobs)
+			{
 				job.Schedule();
+			}
 
 			JobManager.Initialize();
 		}
