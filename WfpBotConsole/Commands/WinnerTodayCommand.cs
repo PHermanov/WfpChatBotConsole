@@ -20,7 +20,7 @@ namespace WfpBotConsole.Commands
 			Lang = lang;
 		}
 
-		public override async Task Execute(long chatId, ITelegramBotClient client, GameRepository repository)
+		public override async Task Execute(long chatId, ITelegramBotClient client, IGameRepository repository)
 		{
 			var todayResult = await repository.GetTodayResultAsync(chatId);
 

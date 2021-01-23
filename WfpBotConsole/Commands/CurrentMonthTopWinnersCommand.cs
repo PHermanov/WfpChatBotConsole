@@ -8,7 +8,7 @@ namespace WfpBotConsole.Commands
 {
     public class CurrentMonthTopWinnersCommand : Command
     {
-        public override async Task Execute(long chatId, ITelegramBotClient client, GameRepository repository)
+        public override async Task Execute(long chatId, ITelegramBotClient client, IGameRepository repository)
         {
             int top = 5;
 

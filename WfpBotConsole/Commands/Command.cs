@@ -21,7 +21,7 @@ namespace WfpBotConsole.Commands
 			{ @"/all", new AllWinnersCommand()}
 		};
 
-		public abstract Task Execute(long chatId, ITelegramBotClient client, GameRepository repository = null);
+		public abstract Task Execute(long chatId, ITelegramBotClient client, IGameRepository repository = null);
 
 		public static Command Parse(string name)
 		{

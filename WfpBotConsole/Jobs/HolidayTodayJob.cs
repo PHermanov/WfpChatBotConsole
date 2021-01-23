@@ -1,24 +1,24 @@
 ﻿using FluentScheduler;
-using System;
-using System.Linq;
-using Telegram.Bot;
-using WfpBotConsole.DB;
 using HtmlAgilityPack;
-using System.Net;
-using Telegram.Bot.Types.Enums;
-using System.Threading.Tasks;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
+using Telegram.Bot;
+using Telegram.Bot.Types.Enums;
+using WfpBotConsole.DB;
 
 namespace WfpBotConsole.Jobs
 {
-	class HolidayTodayJob : IJob
+	class HolidayTodayJob : IScheduleJob
 	{
-		private readonly GameRepository _repository;
+		private readonly IGameRepository _repository;
 		private readonly ITelegramBotClient _client;
 
 		private const string DateFormat = "dddd, dd MMMM";
 
-		public HolidayTodayJob(GameRepository repository, ITelegramBotClient client)
+		public HolidayTodayJob(IGameRepository repository, ITelegramBotClient client)
 		{
 			_repository = repository;
 			_client = client;
@@ -67,6 +67,11 @@ namespace WfpBotConsole.Jobs
 			return doc.DocumentNode
 				.SelectNodes("//ul[contains(@class, 'first')]/li[contains(@class, 'block1')]")
 				.Select(li => $"\u25AA _{li.InnerText}_");
+		}
+
+		public void Schedule()
+		{
+			JobManager.AddJob(this, s => s.ToRunEvery(0).Days().At(10, 30));
 		}
 	}
 }

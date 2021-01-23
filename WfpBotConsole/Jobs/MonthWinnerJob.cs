@@ -6,12 +6,12 @@ using WfpBotConsole.DB;
 
 namespace WfpBotConsole.Jobs
 {
-	public class MonthWinnerJob : IJob
+	public class MonthWinnerJob : IScheduleJob
 	{
-		private readonly GameRepository _repository;
+		private readonly IGameRepository _repository;
 		private readonly ITelegramBotClient _client;
 
-		public MonthWinnerJob(GameRepository repository, ITelegramBotClient client)
+		public MonthWinnerJob(IGameRepository repository, ITelegramBotClient client)
 		{
 			_repository = repository;
 			_client = client;
@@ -29,10 +29,15 @@ namespace WfpBotConsole.Jobs
 				{
 					var mention = monthWinner.GetUserMention();
 					var message = "";
-				
+
 					await _client.TrySendTextMessageAsync(allChatIds[i], message, ParseMode.Markdown);
 				}
 			}
+		}
+
+		public void Schedule()
+		{
+			JobManager.AddJob(this, s => s.ToRunEvery(0).Months().OnTheLastDay().At(12, 05));
 		}
 	}
 }
