@@ -28,7 +28,16 @@ namespace WfpBotConsole
 			{ '9', "\U00000039\U000020E3" }
 		};
 
-		public static async Task TrySendTextMessageAsync(this ITelegramBotClient client, ChatId chatId, string text, ParseMode parseMode = ParseMode.Default, bool disableWebPagePreview = false, bool disableNotification = false, int replyToMessageId = 0, IReplyMarkup replyMarkup = null, CancellationToken cancellationToken = default)
+		public static async Task TrySendTextMessageAsync(
+			this ITelegramBotClient client,
+			ChatId chatId,
+			string text,
+			ParseMode parseMode = ParseMode.Default,
+			bool disableWebPagePreview = false,
+			bool disableNotification = false,
+			int replyToMessageId = 0,
+			IReplyMarkup replyMarkup = null,
+			CancellationToken cancellationToken = default)
 		{
 			try
 			{
@@ -41,11 +50,40 @@ namespace WfpBotConsole
 			}
 		}
 
-		public static async Task TrySendStickerAsync(this ITelegramBotClient client, ChatId chatId, InputOnlineFile sticker, bool disableNotification = false, int replyToMessageId = 0, IReplyMarkup replyMarkup = null, CancellationToken cancellationToken = default)
+		public static async Task TrySendStickerAsync(
+			this ITelegramBotClient client,
+			ChatId chatId,
+			InputOnlineFile sticker,
+			bool disableNotification = false,
+			int replyToMessageId = 0,
+			IReplyMarkup replyMarkup = null,
+			CancellationToken cancellationToken = default)
 		{
 			try
 			{
 				await client.SendStickerAsync(chatId, sticker, disableNotification, replyToMessageId, replyMarkup, cancellationToken);
+			}
+			catch (Exception exception)
+			{
+				Console.WriteLine(exception.GetType());
+				Console.WriteLine(exception.Message);
+			}
+		}
+
+		public static async Task TrySendPhotoAsync(
+			this ITelegramBotClient client,
+			ChatId chatId,
+			InputOnlineFile photo,
+			string caption = null,
+			ParseMode parseMode = ParseMode.Default,
+			bool disableNotification = false,
+			int replyToMessageId = 0,
+			IReplyMarkup replyMarkup = null,
+			CancellationToken cancellationToken = default)
+		{
+			try
+			{
+				await client.SendPhotoAsync(chatId, photo, caption, parseMode, disableNotification, replyToMessageId, replyMarkup, cancellationToken);
 			}
 			catch (Exception exception)
 			{
