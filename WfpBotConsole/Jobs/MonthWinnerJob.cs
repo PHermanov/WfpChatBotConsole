@@ -53,7 +53,9 @@ namespace WfpBotConsole.Jobs
 
 		private async Task<Stream> GetWinnerImage(UserProfilePhotos userProfilePhotos)
 		{
-			var bowlImage = Image.FromFile("Images/bowl.png");
+			using var bowlImage = Image.FromFile("Images/bowl.png");
+
+			var winnerImageStream = new MemoryStream();
 
 			if (userProfilePhotos.Photos.Any())
 			{
@@ -67,48 +69,34 @@ namespace WfpBotConsole.Jobs
 
 				await _client.DownloadFileAsync(photoFile.FilePath, avatarStream);
 
-				var avatarImage = Image.FromStream(avatarStream);
-
-				var winnerImageStream = new MemoryStream();
-
-				using (avatarImage)
+				using (var avatarImage = Image.FromStream(avatarStream))
+				using (var bitmap = new Bitmap(avatarImage.Width, avatarImage.Height))
+				using (var canvas = Graphics.FromImage(bitmap))
 				{
-					using (var bitmap = new Bitmap(avatarImage.Width, avatarImage.Height))
-					{
-						using (var canvas = Graphics.FromImage(bitmap))
-						{
-							canvas.InterpolationMode = InterpolationMode.HighQualityBicubic;
+					canvas.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
-							canvas.DrawImage(avatarImage, new Point());
+					canvas.DrawImage(avatarImage, new Point());
 
-							int bowlSize = bitmap.Width / 2;
+					int bowlSize = bitmap.Width / 2;
 
-							canvas.DrawImage(
-								bowlImage,
-								new Rectangle(0, bitmap.Height - bowlSize, bowlSize, bowlSize),
-								new Rectangle(0, 0, bowlImage.Width, bowlImage.Height),
-								GraphicsUnit.Pixel);
+					canvas.DrawImage(
+						bowlImage,
+						new Rectangle(0, bitmap.Height - bowlSize, bowlSize, bowlSize),
+						new Rectangle(0, 0, bowlImage.Width, bowlImage.Height),
+						GraphicsUnit.Pixel);
 
-							canvas.Save();
-						}
-
-						bitmap.Save(winnerImageStream, ImageFormat.Jpeg);
-					}
+					canvas.Save();
+					bitmap.Save(winnerImageStream, ImageFormat.Png);
 				}
-
-				winnerImageStream.Seek(0, SeekOrigin.Begin);
-
-				return winnerImageStream;
 			}
 			else
 			{
-				var winnerImageStream = new MemoryStream();
-				bowlImage.Save(winnerImageStream, ImageFormat.Jpeg);
-
-				winnerImageStream.Seek(0, SeekOrigin.Begin);
-
-				return winnerImageStream;
+				bowlImage.Save(winnerImageStream, ImageFormat.Png);
 			}
+
+			winnerImageStream.Seek(0, SeekOrigin.Begin);
+
+			return winnerImageStream;
 		}
 	}
 }
