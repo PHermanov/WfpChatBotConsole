@@ -70,6 +70,15 @@ namespace WfpBotConsole {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Наши вам поздравления!.
+        /// </summary>
+        internal static string Congrats {
+            get {
+                return ResourceManager.GetString("Congrats", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Шо нада?.
         /// </summary>
         internal static string Help {
@@ -84,6 +93,15 @@ namespace WfpBotConsole {
         internal static string MissedGames {
             get {
                 return ResourceManager.GetString("MissedGames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to По версии этого казино *пидором масяца* становится .
+        /// </summary>
+        internal static string MonthWinner {
+            get {
+                return ResourceManager.GetString("MonthWinner", resourceCulture);
             }
         }
         

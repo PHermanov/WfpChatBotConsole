@@ -120,11 +120,17 @@
   <data name="AllWinners" xml:space="preserve">
     <value>Все наши славные *пидоры*!</value>
   </data>
+  <data name="Congrats" xml:space="preserve">
+    <value>Наши вам поздравления!</value>
+  </data>
   <data name="Help" xml:space="preserve">
     <value>Шо нада?</value>
   </data>
   <data name="MissedGames" xml:space="preserve">
     <value>*Пидоры потеряшки:* {0}</value>
+  </data>
+  <data name="MonthWinner" xml:space="preserve">
+    <value>По версии этого казино *пидором масяца* становится </value>
   </data>
   <data name="NewPlayerAdded" xml:space="preserve">
     <value>Опа, новый Пидор в игре! Поприветствуем @{0} !</value>
