@@ -1,15 +1,23 @@
 ﻿using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
-using WfpBotConsole.DB;
 
 namespace WfpBotConsole.Commands
 {
-	public class TestCommand : Command
+	public class TestCommand : ICommand
 	{
-		public override async Task Execute(long chatId, ITelegramBotClient client, IGameRepository repository = null)
+		private readonly ITelegramBotClient _telegramBotClient;
+
+		public string CommandKey => "/test";
+
+		public TestCommand(ITelegramBotClient telegramBotClient)
 		{
-			await client.TrySendTextMessageAsync(chatId, $"Хуест!", parseMode: ParseMode.Markdown);
+			_telegramBotClient = telegramBotClient;
+		}
+
+		public async Task Execute(long chatId)
+		{
+			await _telegramBotClient.TrySendTextMessageAsync(chatId, $"Хуест!", parseMode: ParseMode.Markdown);
 		}
 	}
 }

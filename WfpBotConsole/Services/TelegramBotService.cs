@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types.Enums;
-using WfpBotConsole.Commands;
 using WfpBotConsole.DB;
 
 namespace WfpBotConsole.Services
@@ -12,13 +11,16 @@ namespace WfpBotConsole.Services
 	{
 		private readonly ITelegramBotClient _telegramBotClient;
 		private readonly IGameRepository _gameRepository;
+		private readonly ICommandsService _commandsService;
 
 		public TelegramBotService(
 			ITelegramBotClient telegramBotClient,
-			IGameRepository gameRepository)
+			IGameRepository gameRepository,
+			ICommandsService commandsService)
 		{
 			_telegramBotClient = telegramBotClient;
 			_gameRepository = gameRepository;
+			_commandsService = commandsService;
 
 			_telegramBotClient.OnMessage += Bot_OnMessage;
 			_telegramBotClient.OnReceiveError += Client_OnReceiveError;
@@ -69,13 +71,13 @@ namespace WfpBotConsole.Services
 
 				if (newPlayer)
 				{
-					// await client.TrySendTextMessageAsync(chatId, string.Format(Messages.NewPlayerAdded, name));
+					// await _telegramBotClient.TrySendTextMessageAsync(chatId, string.Format(Messages.NewPlayerAdded, name));
 					Console.WriteLine(string.Format(Messages.NewPlayerAdded, userName));
 				}
 
 				if (text.StartsWith(@"/"))
 				{
-					await Command.Parse(text).Execute(e.Message.Chat.Id, _telegramBotClient, _gameRepository);
+					await _commandsService.Execute(e.Message.Chat.Id, text);
 				}
 			}
 		}

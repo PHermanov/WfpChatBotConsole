@@ -7,21 +7,34 @@ using WfpBotConsole.DB;
 
 namespace WfpBotConsole.Commands
 {
-	public class AllWinnersCommand : Command
-    {
-        public override async Task Execute(long chatId, ITelegramBotClient client, IGameRepository repository)
-        {
-            var allWinners = await repository.GetAllWinnersAsync(chatId);
+	public class AllWinnersCommand : ICommand
+	{
+		private readonly ITelegramBotClient _telegramBotClient;
+		private readonly IGameRepository _gameRepository;
 
-            if (allWinners.Any())
-            {
-                string msg = Messages.AllWinners 
-                    + Environment.NewLine 
-                    + Environment.NewLine
-                    + string.Join(Environment.NewLine, allWinners);
+		public string CommandKey => "/all";
 
-                await client.TrySendTextMessageAsync(chatId, msg, ParseMode.Markdown);
-            }
-        }
-    }
+		public AllWinnersCommand(
+			ITelegramBotClient telegramBotClient,
+			IGameRepository gameRepository)
+		{
+			_telegramBotClient = telegramBotClient;
+			_gameRepository = gameRepository;
+		}
+
+		public async Task Execute(long chatId)
+		{
+			var allWinners = await _gameRepository.GetAllWinnersAsync(chatId);
+
+			if (allWinners.Any())
+			{
+				string msg = Messages.AllWinners
+					+ Environment.NewLine
+					+ Environment.NewLine
+					+ string.Join(Environment.NewLine, allWinners);
+
+				await _telegramBotClient.TrySendTextMessageAsync(chatId, msg, ParseMode.Markdown);
+			}
+		}
+	}
 }

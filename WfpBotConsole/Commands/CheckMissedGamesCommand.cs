@@ -9,11 +9,24 @@ using WfpBotConsole.Models;
 
 namespace WfpBotConsole.Commands
 {
-	public class CheckMissedGamesCommand : Command
+	public class CheckMissedGamesCommand : ICommand
 	{
-		public override async Task Execute(long chatId, ITelegramBotClient client, IGameRepository repository = null)
+		private readonly ITelegramBotClient _telegramBotClient;
+		private readonly IGameRepository _gameRepository;
+
+		public string CommandKey => "/checkmissedgames";
+
+		public CheckMissedGamesCommand(
+			ITelegramBotClient telegramBotClient,
+			IGameRepository gameRepository)
 		{
-			var lastGame = await repository.GetLastPlayedGameAsync(chatId);
+			_telegramBotClient = telegramBotClient;
+			_gameRepository = gameRepository;
+		}
+
+		public async Task Execute(long chatId)
+		{
+			var lastGame = await _gameRepository.GetLastPlayedGameAsync(chatId);
 
 			if (lastGame != null)
 			{
@@ -22,11 +35,11 @@ namespace WfpBotConsole.Commands
 
 				while (gameDate.Date < DateTime.Today)
 				{
-					var users = await repository.GetAllPlayersAsync(chatId);
+					var users = await _gameRepository.GetAllPlayersAsync(chatId);
 
 					var newWinner = users[new Random().Next(users.Count)];
 
-					await repository.SaveGameResultAsync(new GameResult()
+					await _gameRepository.SaveGameResultAsync(new GameResult()
 					{
 						ChatId = chatId,
 						UserId = newWinner.UserId,
@@ -42,7 +55,7 @@ namespace WfpBotConsole.Commands
 				if (results.Any())
 				{
 					var msg = string.Format(Messages.MissedGames, $"{Environment.NewLine}{string.Join(Environment.NewLine, results)}");
-					await client.TrySendTextMessageAsync(chatId, msg, ParseMode.Markdown);
+					await _telegramBotClient.TrySendTextMessageAsync(chatId, msg, ParseMode.Markdown);
 				}
 			}
 		}

@@ -4,15 +4,28 @@ using WfpBotConsole.DB;
 
 namespace WfpBotConsole.Commands
 {
-    public class ShowUsersCommand : Command
-    {
-        public override async Task Execute(long chatId, ITelegramBotClient client, IGameRepository repository)
-        {
-            var users = await repository.GetAllPlayersAsync(chatId);
+	public class ShowUsersCommand : ICommand
+	{
+		private readonly ITelegramBotClient _telegramBotClient;
+		private readonly IGameRepository _gameRepository;
 
-            string msg = string.Join(';', users);
+		public string CommandKey => "/showusers";
 
-            await client.TrySendTextMessageAsync(chatId, msg);
-        }
-    }
+		public ShowUsersCommand(
+			ITelegramBotClient telegramBotClient,
+			IGameRepository gameRepository)
+		{
+			_telegramBotClient = telegramBotClient;
+			_gameRepository = gameRepository;
+		}
+
+		public async Task Execute(long chatId)
+		{
+			var users = await _gameRepository.GetAllPlayersAsync(chatId);
+
+			string msg = string.Join(';', users);
+
+			await _telegramBotClient.TrySendTextMessageAsync(chatId, msg);
+		}
+	}
 }

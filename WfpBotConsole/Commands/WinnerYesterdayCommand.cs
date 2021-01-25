@@ -5,19 +5,32 @@ using WfpBotConsole.DB;
 
 namespace WfpBotConsole.Commands
 {
-    public class WinnerYesterdayCommand : Command
-    {
-        public override async Task Execute(long chatId, ITelegramBotClient client, IGameRepository repository)
-        {
-            var yesterdayResult = await repository.GetYesterdayResultAsync(chatId);
+	public class WinnerYesterdayCommand : ICommand
+	{
+		private readonly ITelegramBotClient _telegramBotClient;
+		private readonly IGameRepository _gameRepository;
 
-            if (yesterdayResult != null)
-            {
-                var msg = string.Format(Messages.YesterdayWinner, yesterdayResult.GetUserMention());
+		public string CommandKey => "/yesterday";
 
-                await client.TrySendTextMessageAsync(chatId, msg, ParseMode.Markdown);
-                await client.TrySendTextMessageAsync(chatId, Messages.WinnerForever, ParseMode.Markdown);
-            }
-        }
-    }
+		public WinnerYesterdayCommand(
+			ITelegramBotClient telegramBotClient,
+			IGameRepository gameRepository)
+		{
+			_telegramBotClient = telegramBotClient;
+			_gameRepository = gameRepository;
+		}
+
+		public async Task Execute(long chatId)
+		{
+			var yesterdayResult = await _gameRepository.GetYesterdayResultAsync(chatId);
+
+			if (yesterdayResult != null)
+			{
+				var msg = string.Format(Messages.YesterdayWinner, yesterdayResult.GetUserMention());
+
+				await _telegramBotClient.TrySendTextMessageAsync(chatId, msg, ParseMode.Markdown);
+				await _telegramBotClient.TrySendTextMessageAsync(chatId, Messages.WinnerForever, ParseMode.Markdown);
+			}
+		}
+	}
 }

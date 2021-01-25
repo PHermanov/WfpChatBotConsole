@@ -1,6 +1,7 @@
 ﻿using FluentScheduler;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using Telegram.Bot;
 using WfpBotConsole.Commands;
 using WfpBotConsole.DB;
 
@@ -8,18 +9,24 @@ namespace WfpBotConsole.Jobs
 {
 	public class GetWinnerEverydayJob : IScheduleJob
 	{
-		private readonly IGameRepository _repository;
-		private readonly ITelegramBotClient _client;
+		private readonly IGameRepository _gameRepository;
 
-		public GetWinnerEverydayJob(IGameRepository repository, ITelegramBotClient client)
+		private readonly ICommand _checkMissedGamesCommand;
+		private readonly ICommand _newWinnerCommand;
+
+		public GetWinnerEverydayJob(
+			IEnumerable<ICommand> commands,
+			IGameRepository gameRepository)
 		{
-			_repository = repository;
-			_client = client;
+			_gameRepository = gameRepository;
+
+			_checkMissedGamesCommand = commands.FirstOrDefault(c => c.GetType() == typeof(CheckMissedGamesCommand));
+			_newWinnerCommand = commands.FirstOrDefault(c => c.GetType() == typeof(NewWinnerCommand));
 		}
 
 		public async void Execute()
 		{
-			var allChatIds = await _repository.GetAllChatsIdsAsync();
+			var allChatIds = await _gameRepository.GetAllChatsIdsAsync();
 
 			await Execute(allChatIds);
 		}
@@ -36,13 +43,10 @@ namespace WfpBotConsole.Jobs
 
 		private async Task Execute(params long[] chatIds)
 		{
-			var checkMissedGamesCommand = new CheckMissedGamesCommand();
-			var newWinnerCommand = new NewWinnerCommand();
-
 			for (int i = 0; i < chatIds.Length; i++)
 			{
-				await checkMissedGamesCommand.Execute(chatIds[i], _client, _repository);
-				await newWinnerCommand.Execute(chatIds[i], _client, _repository);
+				await _checkMissedGamesCommand.Execute(chatIds[i]);
+				await _newWinnerCommand.Execute(chatIds[i]);
 			}
 		}
 	}
