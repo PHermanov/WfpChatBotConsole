@@ -1,4 +1,5 @@
 ﻿using FluentScheduler;
+using System.Threading.Tasks;
 using Telegram.Bot;
 using WfpBotConsole.Commands;
 using WfpBotConsole.DB;
@@ -20,19 +21,29 @@ namespace WfpBotConsole.Jobs
 		{
 			var allChatIds = await _repository.GetAllChatsIdsAsync();
 
-			var checkMissedGamesCommand = new CheckMissedGamesCommand();
-			var newWinnerCommand = new NewWinnerCommand();
+			await Execute(allChatIds);
+		}
 
-			for (int i = 0; i < allChatIds.Length; i++)
-			{
-				await checkMissedGamesCommand.Execute(allChatIds[i], _client, _repository);
-				await newWinnerCommand.Execute(allChatIds[i], _client, _repository);
-			}
+		public async Task Execute(long chatId)
+		{
+			await Execute(chatId);
 		}
 
 		public void Schedule()
 		{
 			JobManager.AddJob(this, s => s.ToRunEvery(0).Days().At(12, 00));
+		}
+
+		private async Task Execute(params long[] chatIds)
+		{
+			var checkMissedGamesCommand = new CheckMissedGamesCommand();
+			var newWinnerCommand = new NewWinnerCommand();
+
+			for (int i = 0; i < chatIds.Length; i++)
+			{
+				await checkMissedGamesCommand.Execute(chatIds[i], _client, _repository);
+				await newWinnerCommand.Execute(chatIds[i], _client, _repository);
+			}
 		}
 	}
 }

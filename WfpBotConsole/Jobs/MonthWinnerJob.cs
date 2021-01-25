@@ -29,9 +29,24 @@ namespace WfpBotConsole.Jobs
 		{
 			var allChatIds = await _repository.GetAllChatsIdsAsync();
 
-			for (int i = 0; i < allChatIds.Length; i++)
+			await Execute(allChatIds);
+		}
+
+		public async Task Execute(long chatId)
+		{
+			await Execute(chatId);
+		}
+
+		public void Schedule()
+		{
+			JobManager.AddJob(this, s => s.ToRunEvery(0).Months().OnTheLastDay().At(12, 05));
+		}
+
+		private async Task Execute(params long[] chatIds)
+		{
+			for (int i = 0; i < chatIds.Length; i++)
 			{
-				var monthWinner = await _repository.GetWinnerForMonthAsync(allChatIds[i], DateTime.Today);
+				var monthWinner = await _repository.GetWinnerForMonthAsync(chatIds[i], DateTime.Today);
 
 				if (monthWinner != null)
 				{
@@ -41,14 +56,9 @@ namespace WfpBotConsole.Jobs
 					var userProfilePhotos = await _client.GetUserProfilePhotosAsync(monthWinner.UserId);
 					using var winnerImage = await GetWinnerImage(userProfilePhotos);
 
-					await _client.TrySendPhotoAsync(allChatIds[i], new InputOnlineFile(winnerImage), message, ParseMode.Markdown);
+					await _client.TrySendPhotoAsync(chatIds[i], new InputOnlineFile(winnerImage), message, ParseMode.Markdown);
 				}
 			}
-		}
-
-		public void Schedule()
-		{
-			JobManager.AddJob(this, s => s.ToRunEvery(0).Months().OnTheLastDay().At(12, 05));
 		}
 
 		private async Task<Stream> GetWinnerImage(UserProfilePhotos userProfilePhotos)
