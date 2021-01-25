@@ -26,34 +26,14 @@ namespace WfpBotConsole.Jobs
 
 		public async void Execute()
 		{
-			try
-			{
-				var holidays = await GetHolidays();
+			var allChatIds = await _repository.GetAllChatsIdsAsync();
 
-				if (holidays.Any())
-				{
-					var todayFormatted = DateTime.Today.ToString(DateFormat, new System.Globalization.CultureInfo("ru-RU")).ReplaceDigits();
+			await Execute(allChatIds);
+		}
 
-					var message = Messages.TodayString
-							+ todayFormatted
-							+ Environment.NewLine
-							+ Environment.NewLine
-							+ string.Join(Environment.NewLine, holidays);
-
-
-					var allChatIds = await _repository.GetAllChatsIdsAsync();
-
-					for (int i = 0; i < allChatIds.Length; i++)
-					{
-						await _client.TrySendTextMessageAsync(allChatIds[i], message, ParseMode.Markdown);
-					}
-				}
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine(ex.GetType());
-				Console.WriteLine(ex.Message);
-			}
+		public async Task Execute(long chatId)
+		{
+			await Execute(chatId);
 		}
 
 		private async Task<IEnumerable<string>> GetHolidays()
@@ -72,6 +52,36 @@ namespace WfpBotConsole.Jobs
 		public void Schedule()
 		{
 			JobManager.AddJob(this, s => s.ToRunEvery(0).Days().At(10, 30));
+		}
+
+		private async Task Execute(params long[] chatIds)
+		{
+			try
+			{
+				var holidays = await GetHolidays();
+
+				if (holidays.Any())
+				{
+					var todayFormatted = DateTime.Today.ToString(DateFormat, new System.Globalization.CultureInfo("ru-RU")).ReplaceDigits();
+
+					var message = Messages.TodayString
+							+ todayFormatted
+							+ Environment.NewLine
+							+ Environment.NewLine
+							+ string.Join(Environment.NewLine, holidays);
+
+
+					for (int i = 0; i < chatIds.Length; i++)
+					{
+						await _client.TrySendTextMessageAsync(chatIds[i], message, ParseMode.Markdown);
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.GetType());
+				Console.WriteLine(ex.Message);
+			}
 		}
 	}
 }

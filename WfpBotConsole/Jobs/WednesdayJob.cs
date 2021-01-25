@@ -1,5 +1,6 @@
 ﻿using FluentScheduler;
 using System;
+using System.Threading.Tasks;
 using Telegram.Bot;
 using WfpBotConsole.DB;
 using WfpBotConsole.Stickers;
@@ -21,16 +22,26 @@ namespace WfpBotConsole.Jobs
 		{
 			var allChatIds = await _repository.GetAllChatsIdsAsync();
 
-			for (int i = 0; i < allChatIds.Length; i++)
-			{
-				await _client.TrySendTextMessageAsync(allChatIds[i], Messages.WednesdayMyDudes);
-				await _client.TrySendStickerAsync(allChatIds[i], StickersSelector.SelectRandomFromSet(StickersSelector.SticketSet.Frog));
-			}
+			await Execute(allChatIds);
+		}
+
+		public async Task Execute(long chatId)
+		{
+			await Execute(chatId);
 		}
 
 		public void Schedule()
 		{
 			JobManager.AddJob(this, s => s.ToRunEvery(0).Weeks().On(DayOfWeek.Wednesday).At(11, 00));
+		}
+
+		private async Task Execute(params long[] chatIds)
+		{
+			for (int i = 0; i < chatIds.Length; i++)
+			{
+				await _client.TrySendTextMessageAsync(chatIds[i], Messages.WednesdayMyDudes);
+				await _client.TrySendStickerAsync(chatIds[i], StickersSelector.SelectRandomFromSet(StickersSelector.SticketSet.Frog));
+			}
 		}
 	}
 }

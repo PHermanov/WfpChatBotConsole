@@ -130,7 +130,7 @@
     <value>*Пидоры потеряшки:* {0}</value>
   </data>
   <data name="MonthWinner" xml:space="preserve">
-    <value>По версии этого казино *пидором масяца* становится </value>
+    <value>По версии этого казино *пидором месяца* становится </value>
   </data>
   <data name="NewPlayerAdded" xml:space="preserve">
     <value>Опа, новый Пидор в игре! Поприветствуем @{0} !</value>

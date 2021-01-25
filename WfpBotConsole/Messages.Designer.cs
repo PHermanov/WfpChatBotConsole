@@ -97,7 +97,7 @@ namespace WfpBotConsole {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to По версии этого казино *пидором масяца* становится .
+        ///   Looks up a localized string similar to По версии этого казино *пидором месяца* становится .
         /// </summary>
         internal static string MonthWinner {
             get {
