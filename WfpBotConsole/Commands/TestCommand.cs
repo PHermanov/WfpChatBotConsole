@@ -15,7 +15,8 @@ namespace WfpBotConsole.Commands
 	{
 		public override async Task Execute(long chatId, ITelegramBotClient client, IGameRepository repository = null)
 		{
-			await client.TrySendTextMessageAsync(chatId, $"Хуест!", parseMode: ParseMode.Markdown);
+			new MonthWinnerJob(repository, client).Execute();
+			//await client.TrySendTextMessageAsync(chatId, $"Хуест!", parseMode: ParseMode.Markdown);
 			
 			// await client.TrySendStickerAsync(chatId, StickersSelector.SelectRandomFromSet(StickersSelector.SticketSet.Frog));
 
