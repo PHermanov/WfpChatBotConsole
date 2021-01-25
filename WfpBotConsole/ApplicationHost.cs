@@ -41,7 +41,8 @@ namespace WfpBotConsole
 			serviceCollection
 				.AddDBContext()
 				.AddTelegramBotClient()
-				.AddJobs();
+				.AddJobs()
+				.AddCommands();
 		}
 
 		private void OnApplicationStopping()

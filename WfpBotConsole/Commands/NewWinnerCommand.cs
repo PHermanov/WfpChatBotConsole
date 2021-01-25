@@ -8,37 +8,50 @@ using WfpBotConsole.Stickers;
 
 namespace WfpBotConsole.Commands
 {
-    public class NewWinnerCommand : Command
-    {
-        public override async Task Execute(long chatId, ITelegramBotClient client, IGameRepository repository = null)
-        {
-            var todayResult = await repository.GetTodayResultAsync(chatId);
+	public class NewWinnerCommand : ICommand
+	{
+		private readonly ITelegramBotClient _telegramBotClient;
+		private readonly IGameRepository _gameRepository;
 
-            var messageTemplate = Messages.TodayWinnerAlreadySet;
+		public string CommandKey => "/newwinner";
 
-            if (todayResult == null)
-            {
-                var users = await repository.GetAllPlayersAsync(chatId);
+		public NewWinnerCommand(
+			ITelegramBotClient telegramBotClient,
+			IGameRepository gameRepository)
+		{
+			_telegramBotClient = telegramBotClient;
+			_gameRepository = gameRepository;
+		}
 
-                var newWinner = users[new Random().Next(users.Count)];
+		public async Task Execute(long chatId)
+		{
+			var todayResult = await _gameRepository.GetTodayResultAsync(chatId);
 
-                messageTemplate = Messages.NewWinner;
+			var messageTemplate = Messages.TodayWinnerAlreadySet;
 
-                todayResult = new GameResult()
-                {
-                    ChatId = chatId,
-                    UserId = newWinner.UserId,
-                    UserName = newWinner.UserName,
-                    PlayedAt = DateTime.Today
-                };
+			if (todayResult == null)
+			{
+				var users = await _gameRepository.GetAllPlayersAsync(chatId);
 
-                await repository.SaveGameResultAsync(todayResult);
-            }
+				var newWinner = users[new Random().Next(users.Count)];
 
-            var msg = string.Format(messageTemplate, todayResult.GetUserMention());
+				messageTemplate = Messages.NewWinner;
 
-            await client.TrySendTextMessageAsync(chatId, msg, ParseMode.Markdown);
-            await client.TrySendStickerAsync(chatId, StickersSelector.SelectRandomFromSet(StickersSelector.SticketSet.Yoba));
-        }
-    }
+				todayResult = new GameResult()
+				{
+					ChatId = chatId,
+					UserId = newWinner.UserId,
+					UserName = newWinner.UserName,
+					PlayedAt = DateTime.Today
+				};
+
+				await _gameRepository.SaveGameResultAsync(todayResult);
+			}
+
+			var msg = string.Format(messageTemplate, todayResult.GetUserMention());
+
+			await _telegramBotClient.TrySendTextMessageAsync(chatId, msg, ParseMode.Markdown);
+			await _telegramBotClient.TrySendStickerAsync(chatId, StickersSelector.SelectRandomFromSet(StickersSelector.SticketSet.Yoba));
+		}
+	}
 }
