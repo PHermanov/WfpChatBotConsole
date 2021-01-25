@@ -1,13 +1,15 @@
-﻿using HtmlAgilityPack;
-using System;
+﻿using System;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using Telegram.Bot;
+using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
+using Telegram.Bot.Types.InputFiles;
 using WfpBotConsole.DB;
-using WfpBotConsole.Jobs;
-using WfpBotConsole.Stickers;
 
 namespace WfpBotConsole.Commands
 {
@@ -17,33 +19,67 @@ namespace WfpBotConsole.Commands
 		{
 			await client.TrySendTextMessageAsync(chatId, $"Хуест!", parseMode: ParseMode.Markdown);
 
-			var job = new MonthWinnerJob(repository, client);
-			job.Execute();
+			var monthWinner = await repository.GetWinnerForMonthAsync(chatId, DateTime.Today);
 
-			// await client.TrySendStickerAsync(chatId, StickersSelector.SelectRandomFromSet(StickersSelector.SticketSet.Frog));
+			if (monthWinner != null)
+			{
+				var mention = monthWinner.GetUserMention();
+				var message = $"{Messages.MonthWinner}{Environment.NewLine}\u269C {mention} \u269C{Environment.NewLine}{Messages.Congrats}";
 
-			//using var webClient = new WebClient();
-			//var html = await webClient.DownloadStringTaskAsync("https://kakoysegodnyaprazdnik.com/");
+				var userProfilePhotos = await client.GetUserProfilePhotosAsync(monthWinner.UserId);
+				using var winnerImage = await GetWinnerImage(userProfilePhotos, client);
 
-			//var doc = new HtmlDocument();
-			//doc.LoadHtml(html);
+				await client.TrySendPhotoAsync(chatId, new InputOnlineFile(winnerImage), message, ParseMode.Markdown);
+			}
+		}
 
-			//var holidays = doc.DocumentNode.SelectNodes("//ul[contains(@class, 'first')]/li[contains(@class, 'block1')]").Select(li => "_" + li.InnerText + "_");
+		private async Task<Stream> GetWinnerImage(UserProfilePhotos userProfilePhotos, ITelegramBotClient client)
+		{
+			using var bowlImage = Image.FromFile("Images/bowl.png");
 
-			//var todayFormatted = DateTime.Today.ToString("dddd, dd MMMM yyyy", new System.Globalization.CultureInfo("ru-RU")).ReplaceDigits();
+			var winnerImageStream = new MemoryStream();
 
-			//var message = Messages.TodayString
-			//		+ todayFormatted
-			//		+ Environment.NewLine
-			//		+ Environment.NewLine
-			//		+ Messages.TodayHolidays
-			//		+ Environment.NewLine
-			//		+ string.Join(Environment.NewLine, holidays);
+			if (userProfilePhotos.Photos.Any())
+			{
+				var photoSize = userProfilePhotos.Photos[0]
+					.OrderByDescending(p => p.Height)
+					.FirstOrDefault();
 
-			//if (holidays.Any())
-			//{
-			//	await client.TrySendTextMessageAsync(chatId, message, ParseMode.Markdown);
-			//}
+				var photoFile = await client.GetFileAsync(photoSize.FileId);
+
+				using var avatarStream = new MemoryStream();
+
+				await client.DownloadFileAsync(photoFile.FilePath, avatarStream);
+
+				using (var avatarImage = Image.FromStream(avatarStream))
+				using (var bitmap = new Bitmap(avatarImage.Width, avatarImage.Height))
+				using (var canvas = Graphics.FromImage(bitmap))
+				{
+					canvas.InterpolationMode = InterpolationMode.HighQualityBicubic;
+
+					canvas.DrawImage(avatarImage, new Point());
+
+					int bowlSize = bitmap.Width / 2;
+
+					canvas.DrawImage(
+						bowlImage,
+						new Rectangle(0, bitmap.Height - bowlSize, bowlSize, bowlSize),
+						new Rectangle(0, 0, bowlImage.Width, bowlImage.Height),
+						GraphicsUnit.Pixel);
+
+					canvas.Save();
+					bitmap.Save(winnerImageStream, ImageFormat.Png);
+				}
+			}
+			else
+			{
+				bowlImage.Save(winnerImageStream, ImageFormat.Png);
+			}
+
+			winnerImageStream.Seek(0, SeekOrigin.Begin);
+
+			return winnerImageStream;
 		}
 	}
+
 }
