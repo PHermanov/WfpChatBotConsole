@@ -31,23 +31,18 @@ namespace WfpBotConsole.Jobs
 			await Execute(allChatIds);
 		}
 
-		public async Task Execute(long chatId)
-		{
-			await Execute(chatId);
-		}
-
-		public void Schedule()
-		{
-			JobManager.AddJob(this, s => s.ToRunEvery(0).Days().At(12, 00));
-		}
-
-		private async Task Execute(params long[] chatIds)
+		public async Task Execute(params long[] chatIds)
 		{
 			for (int i = 0; i < chatIds.Length; i++)
 			{
 				await _checkMissedGamesCommand.Execute(chatIds[i]);
 				await _newWinnerCommand.Execute(chatIds[i]);
 			}
+		}
+
+		public void Schedule()
+		{
+			JobManager.AddJob(this, s => s.ToRunEvery(0).Days().At(12, 00));
 		}
 	}
 }

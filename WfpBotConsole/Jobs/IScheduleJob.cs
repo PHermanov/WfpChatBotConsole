@@ -7,6 +7,6 @@ namespace WfpBotConsole.Jobs
 	{
 		void Schedule();
 
-		Task Execute(long chatId);
+		Task Execute(params long[] chatIds);
 	}
 }

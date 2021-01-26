@@ -25,23 +25,18 @@ namespace WfpBotConsole.Jobs
 			await Execute(allChatIds);
 		}
 
-		public async Task Execute(long chatId)
-		{
-			await Execute(chatId);
-		}
-
-		public void Schedule()
-		{
-			JobManager.AddJob(this, s => s.ToRunEvery(0).Weeks().On(DayOfWeek.Wednesday).At(11, 00));
-		}
-
-		private async Task Execute(params long[] chatIds)
+		public async Task Execute(params long[] chatIds)
 		{
 			for (int i = 0; i < chatIds.Length; i++)
 			{
 				await _client.TrySendTextMessageAsync(chatIds[i], Messages.WednesdayMyDudes);
 				await _client.TrySendStickerAsync(chatIds[i], StickersSelector.SelectRandomFromSet(StickersSelector.SticketSet.Frog));
 			}
+		}
+
+		public void Schedule()
+		{
+			JobManager.AddJob(this, s => s.ToRunEvery(0).Weeks().On(DayOfWeek.Wednesday).At(11, 00));
 		}
 	}
 }
