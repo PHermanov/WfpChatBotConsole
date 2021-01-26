@@ -24,17 +24,7 @@ namespace WfpBotConsole.Jobs
 			await Execute(allChatIds);
 		}
 
-		public async Task Execute(long chatId)
-		{
-			await Execute(chatId);
-		}
-
-		public void Schedule()
-		{
-			JobManager.AddJob(this, s => s.ToRunEvery(0).Days().At(12, 00));
-		}
-
-		private async Task Execute(params long[] chatIds)
+		public async Task Execute(params long[] chatIds)
 		{
 			var checkMissedGamesCommand = new CheckMissedGamesCommand();
 			var newWinnerCommand = new NewWinnerCommand();
@@ -44,6 +34,11 @@ namespace WfpBotConsole.Jobs
 				await checkMissedGamesCommand.Execute(chatIds[i], _client, _repository);
 				await newWinnerCommand.Execute(chatIds[i], _client, _repository);
 			}
+		}
+
+		public void Schedule()
+		{
+			JobManager.AddJob(this, s => s.ToRunEvery(0).Days().At(12, 00));
 		}
 	}
 }

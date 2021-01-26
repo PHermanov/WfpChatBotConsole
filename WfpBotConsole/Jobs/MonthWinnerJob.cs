@@ -32,17 +32,7 @@ namespace WfpBotConsole.Jobs
 			await Execute(allChatIds);
 		}
 
-		public async Task Execute(long chatId)
-		{
-			await Execute(chatId);
-		}
-
-		public void Schedule()
-		{
-			JobManager.AddJob(this, s => s.ToRunEvery(0).Months().OnTheLastDay().At(12, 05));
-		}
-
-		private async Task Execute(params long[] chatIds)
+		public async Task Execute(params long[] chatIds)
 		{
 			for (int i = 0; i < chatIds.Length; i++)
 			{
@@ -59,6 +49,11 @@ namespace WfpBotConsole.Jobs
 					await _client.TrySendPhotoAsync(chatIds[i], new InputOnlineFile(winnerImage), message, ParseMode.Markdown);
 				}
 			}
+		}
+
+		public void Schedule()
+		{
+			JobManager.AddJob(this, s => s.ToRunEvery(0).Months().OnTheLastDay().At(12, 05));
 		}
 
 		private async Task<Stream> GetWinnerImage(UserProfilePhotos userProfilePhotos)
@@ -84,19 +79,49 @@ namespace WfpBotConsole.Jobs
 				using (var canvas = Graphics.FromImage(bitmap))
 				{
 					canvas.InterpolationMode = InterpolationMode.HighQualityBicubic;
+					canvas.SmoothingMode = SmoothingMode.AntiAlias;
+					canvas.PixelOffsetMode = PixelOffsetMode.HighQuality;
 
 					canvas.DrawImage(avatarImage, new Point());
 
-					int bowlSize = bitmap.Width / 2;
+					var hPadding = bitmap.Height / 10;
+					var vPadding = hPadding / 2;
+
+					// add bowl image to avatar
+					var bowlRatio = (double)(bitmap.Height / 2.5) / bowlImage.Height;
+					var bowlWidth = (int)(bowlImage.Width * bowlRatio);
+					var bowlHeight = (int)(bowlImage.Height * bowlRatio);
 
 					canvas.DrawImage(
 						bowlImage,
-						new Rectangle(0, bitmap.Height - bowlSize, bowlSize, bowlSize),
+						new Rectangle(hPadding, bitmap.Height - bowlHeight - vPadding, bowlWidth, bowlHeight),
 						new Rectangle(0, 0, bowlImage.Width, bowlImage.Height),
 						GraphicsUnit.Pixel);
 
-					canvas.Save();
-					bitmap.Save(winnerImageStream, ImageFormat.Png);
+					// add month and year text to avatar
+					using (var gp = new GraphicsPath())
+					{
+						var stringFormat = new StringFormat();
+						stringFormat.Alignment = StringAlignment.Center;
+						stringFormat.LineAlignment = StringAlignment.Center;
+
+						float fontSize = 60;
+						using var font = new Font("Impact", fontSize, FontStyle.Bold, GraphicsUnit.Pixel);
+
+						gp.AddString(
+							DateTime.Today.ToString($"MMMM{Environment.NewLine}yyyy", new System.Globalization.CultureInfo("en-US")),
+							font.FontFamily,
+							(int)font.Style,
+							fontSize,
+							new Rectangle(hPadding + bowlWidth, bitmap.Height - bowlHeight - vPadding, bitmap.Width - bowlWidth - hPadding, bowlHeight),
+							stringFormat);
+
+						canvas.DrawPath(new Pen(Color.Black, 8) { LineJoin = LineJoin.Round }, gp);
+						canvas.FillPath(Brushes.White, gp);
+
+						canvas.Save();
+						bitmap.Save(winnerImageStream, ImageFormat.Png);
+					}
 				}
 			}
 			else
