@@ -23,8 +23,8 @@ namespace WfpBotConsole.Commands
 		{
 			await _telegramBotClient.TrySendTextMessageAsync(chatId, $"Хуест!", ParseMode.Markdown);
 
-			var monthJob = new MonthWinnerJob(_gameRepository, _telegramBotClient);
-			await monthJob.Execute(chatId);
+			//var monthJob = new MonthWinnerJob(_gameRepository, _telegramBotClient);
+			//await monthJob.Execute(chatId);
 		}
 	}
 }
