@@ -4,6 +4,7 @@ using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types.Enums;
 using WfpBotConsole.DB;
+using WfpBotConsole.Resources;
 
 namespace WfpBotConsole.Services
 {
@@ -12,15 +13,18 @@ namespace WfpBotConsole.Services
 		private readonly ITelegramBotClient _telegramBotClient;
 		private readonly IGameRepository _gameRepository;
 		private readonly ICommandsService _commandsService;
+		private readonly IAutoReplyService _autoReplyService;
 
 		public TelegramBotService(
 			ITelegramBotClient telegramBotClient,
 			IGameRepository gameRepository,
-			ICommandsService commandsService)
+			ICommandsService commandsService,
+			IAutoReplyService autoReplyService)
 		{
 			_telegramBotClient = telegramBotClient;
 			_gameRepository = gameRepository;
 			_commandsService = commandsService;
+			_autoReplyService = autoReplyService;
 
 			_telegramBotClient.OnMessage += Bot_OnMessage;
 			_telegramBotClient.OnReceiveError += Client_OnReceiveError;
@@ -74,6 +78,8 @@ namespace WfpBotConsole.Services
 					// await _telegramBotClient.TrySendTextMessageAsync(chatId, string.Format(Messages.NewPlayerAdded, name));
 					Console.WriteLine(string.Format(Messages.NewPlayerAdded, userName));
 				}
+
+				await _autoReplyService.AutoReplyAsync(e.Message);
 
 				if (text.StartsWith(@"/"))
 				{

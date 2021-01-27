@@ -3,6 +3,7 @@ using System;
 using System.Threading.Tasks;
 using Telegram.Bot;
 using WfpBotConsole.DB;
+using WfpBotConsole.Resources;
 using WfpBotConsole.Stickers;
 
 namespace WfpBotConsole.Jobs

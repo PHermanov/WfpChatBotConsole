@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Telegram.Bot;
+using WfpBotConsole.Resources;
 
 namespace WfpBotConsole.Commands
 {
