@@ -1,3 +1,9 @@
 ﻿https://raw.githubusercontent.com/PHermanov/WfpChatBotConsole/main/WfpBotConsole/Stickers/yoba.webp
 https://raw.githubusercontent.com/PHermanov/WfpChatBotConsole/main/WfpBotConsole/Stickers/yobaLeft.webp
 https://raw.githubusercontent.com/PHermanov/WfpChatBotConsole/main/WfpBotConsole/Stickers/yobaSmug.webp
+https://raw.githubusercontent.com/PHermanov/WfpChatBotConsole/main/WfpBotConsole/Stickers/yobaBlink.webp
+https://raw.githubusercontent.com/PHermanov/WfpChatBotConsole/main/WfpBotConsole/Stickers/yobaCute.webp
+https://raw.githubusercontent.com/PHermanov/WfpChatBotConsole/main/WfpBotConsole/Stickers/yobaGood.webp
+https://raw.githubusercontent.com/PHermanov/WfpChatBotConsole/main/WfpBotConsole/Stickers/yobaPhone.webp
+https://raw.githubusercontent.com/PHermanov/WfpChatBotConsole/main/WfpBotConsole/Stickers/yobaRight2.webp
+https://raw.githubusercontent.com/PHermanov/WfpChatBotConsole/main/WfpBotConsole/Stickers/yobaLook.webp
