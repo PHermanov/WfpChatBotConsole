@@ -6,6 +6,7 @@ using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
 using WfpBotConsole.DB;
 using WfpBotConsole.Models;
+using WfpBotConsole.Resources;
 
 namespace WfpBotConsole.Commands
 {

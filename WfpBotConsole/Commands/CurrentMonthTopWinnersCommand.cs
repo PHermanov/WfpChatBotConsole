@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
 using WfpBotConsole.DB;
+using WfpBotConsole.Resources;
 
 namespace WfpBotConsole.Commands
 {

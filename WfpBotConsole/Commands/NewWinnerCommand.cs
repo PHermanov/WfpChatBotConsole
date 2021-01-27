@@ -4,6 +4,7 @@ using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
 using WfpBotConsole.DB;
 using WfpBotConsole.Models;
+using WfpBotConsole.Resources;
 using WfpBotConsole.Stickers;
 
 namespace WfpBotConsole.Commands
