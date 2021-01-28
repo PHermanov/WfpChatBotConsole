@@ -1,12 +1,14 @@
 ﻿using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
+using WfpBotConsole.Core.Attributes;
 using WfpBotConsole.DB;
 using WfpBotConsole.Jobs;
 using WfpBotConsole.Stickers;
 
 namespace WfpBotConsole.Commands
 {
+	[Inject]
 	public class TestCommand : ICommand
 	{
 		private readonly ITelegramBotClient _telegramBotClient;

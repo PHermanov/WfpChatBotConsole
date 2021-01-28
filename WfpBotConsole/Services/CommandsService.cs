@@ -2,9 +2,12 @@
 using System.Linq;
 using System.Threading.Tasks;
 using WfpBotConsole.Commands;
+using WfpBotConsole.Core.Attributes;
+using WfpBotConsole.Core.Enums;
 
 namespace WfpBotConsole.Services
 {
+	[Inject(RegistrationScope.Singleton)]
 	public class CommandsService : ICommandsService
 	{
 		private readonly IEnumerable<ICommand> _commands;

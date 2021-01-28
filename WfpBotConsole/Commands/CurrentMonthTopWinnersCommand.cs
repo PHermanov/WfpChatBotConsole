@@ -2,11 +2,13 @@
 using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
+using WfpBotConsole.Core.Attributes;
 using WfpBotConsole.DB;
 using WfpBotConsole.Resources;
 
 namespace WfpBotConsole.Commands
 {
+	[Inject]
 	public class CurrentMonthTopWinnersCommand : ICommand
 	{
 		private readonly ITelegramBotClient _telegramBotClient;

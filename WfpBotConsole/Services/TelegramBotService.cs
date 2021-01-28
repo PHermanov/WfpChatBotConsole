@@ -3,11 +3,14 @@ using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types.Enums;
+using WfpBotConsole.Core.Attributes;
+using WfpBotConsole.Core.Enums;
 using WfpBotConsole.DB;
 using WfpBotConsole.Resources;
 
 namespace WfpBotConsole.Services
 {
+	[Inject(RegistrationScope.Singleton)]
 	public class TelegramBotService : ITelegramBotService
 	{
 		private readonly ITelegramBotClient _telegramBotClient;

@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using WfpBotConsole.Core.Attributes;
 using WfpBotConsole.Models;
 
 namespace WfpBotConsole.DB
 {
+	[Inject]
 	public class GameContext : DbContext, IGameContext
 	{
 		public DbSet<Player> Players { get; set; }

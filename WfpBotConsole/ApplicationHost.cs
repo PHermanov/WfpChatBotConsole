@@ -39,11 +39,8 @@ namespace WfpBotConsole
 			IServiceCollection serviceCollection)
 		{
 			serviceCollection
-				.AddDBContext()
 				.AddTelegramBotClient()
-				.AddJobs()
-				.AddCommands()
-				.AddServices();
+				.AddInjectedServices();
 		}
 
 		private void OnApplicationStopping()

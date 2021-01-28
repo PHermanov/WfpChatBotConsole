@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
+using WfpBotConsole.Core.Attributes;
 using WfpBotConsole.DB;
 using WfpBotConsole.Models;
 using WfpBotConsole.Resources;
@@ -9,6 +10,7 @@ using WfpBotConsole.Stickers;
 
 namespace WfpBotConsole.Commands
 {
+	[Inject]
 	public class NewWinnerCommand : ICommand
 	{
 		private readonly ITelegramBotClient _telegramBotClient;

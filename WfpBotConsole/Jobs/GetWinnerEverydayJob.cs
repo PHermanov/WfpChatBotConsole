@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WfpBotConsole.Commands;
+using WfpBotConsole.Core.Attributes;
 using WfpBotConsole.DB;
 
 namespace WfpBotConsole.Jobs
 {
+	[Inject]
 	public class GetWinnerEverydayJob : IScheduleJob
 	{
 		private readonly IGameRepository _gameRepository;

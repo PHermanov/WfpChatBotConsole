@@ -7,11 +7,13 @@ using System.Net;
 using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
+using WfpBotConsole.Core.Attributes;
 using WfpBotConsole.DB;
 using WfpBotConsole.Resources;
 
 namespace WfpBotConsole.Jobs
 {
+	[Inject]
 	class HolidayTodayJob : IScheduleJob
 	{
 		private readonly IGameRepository _repository;

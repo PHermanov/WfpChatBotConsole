@@ -1,8 +1,11 @@
 ﻿using FluentScheduler;
 using System.Collections.Generic;
+using WfpBotConsole.Core.Attributes;
+using WfpBotConsole.Core.Enums;
 
 namespace WfpBotConsole.Jobs
 {
+	[Inject(RegistrationScope.Singleton)]
 	public class JobManagerHelper : IJobManagerHelper
 	{
 		private readonly IEnumerable<IScheduleJob> _jobs;
