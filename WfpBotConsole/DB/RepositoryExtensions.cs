@@ -15,8 +15,10 @@ namespace WfpBotConsole.DB
 				{
 					UserId = gr.Key.UserId,
 					UserName = gr.Key.UserName,
-					Count = gr.Count()
+					Count = gr.Count(),
+					LastWin = gr.Max(r => r.PlayedAt)
 				})
-				.OrderByDescending(c => c.Count);
+				.OrderByDescending(c => c.Count)
+				.ThenBy(c => c.LastWin);
 	}
 }
