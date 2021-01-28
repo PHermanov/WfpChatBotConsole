@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
@@ -21,6 +22,7 @@ namespace WfpBotConsole.Services
 
 			if (!string.IsNullOrEmpty(answer))
 			{
+				await Task.Delay(TimeSpan.FromSeconds(1));
 				await _telegramBotClient.TrySendTextMessageAsync(message.Chat.Id, answer, ParseMode.Markdown, replyToMessageId: message.MessageId);
 			}
 		}
