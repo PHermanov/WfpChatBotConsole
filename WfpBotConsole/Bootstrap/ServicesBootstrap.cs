@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Reflection;
 using WfpBotConsole.Core.Extensions;
-using WfpBotConsole.Services;
 
 namespace WfpBotConsole.Bootstrap
 {
