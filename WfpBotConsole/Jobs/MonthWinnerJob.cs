@@ -10,11 +10,13 @@ using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.InputFiles;
+using WfpBotConsole.Core.Attributes;
 using WfpBotConsole.DB;
 using WfpBotConsole.Resources;
 
 namespace WfpBotConsole.Jobs
 {
+	[Inject]
 	public class MonthWinnerJob : IScheduleJob
 	{
 		private readonly IGameRepository _repository;

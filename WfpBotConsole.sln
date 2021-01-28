@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30803.129
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WfpBotConsole", "WfpBotConsole\WfpBotConsole.csproj", "{B5B642C2-9FBD-4A52-93E3-771C739A5E1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WfpBotConsole.Resources", "WfpBotConsole.Resources\WfpBotConsole.Resources.csproj", "{DDC5B6F5-4C18-45B9-AE6F-BFB6AD24EB54}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WfpBotConsole.Resources", "WfpBotConsole.Resources\WfpBotConsole.Resources.csproj", "{DDC5B6F5-4C18-45B9-AE6F-BFB6AD24EB54}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WfpBotConsole.Core", "WfpBotConsole.Core\WfpBotConsole.Core.csproj", "{15DD743B-EC64-40B2-B992-5AA65097EBC6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{DDC5B6F5-4C18-45B9-AE6F-BFB6AD24EB54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDC5B6F5-4C18-45B9-AE6F-BFB6AD24EB54}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDC5B6F5-4C18-45B9-AE6F-BFB6AD24EB54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15DD743B-EC64-40B2-B992-5AA65097EBC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15DD743B-EC64-40B2-B992-5AA65097EBC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15DD743B-EC64-40B2-B992-5AA65097EBC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15DD743B-EC64-40B2-B992-5AA65097EBC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

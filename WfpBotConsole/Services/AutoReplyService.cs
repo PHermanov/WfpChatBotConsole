@@ -4,10 +4,13 @@ using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
+using WfpBotConsole.Core.Attributes;
+using WfpBotConsole.Core.Enums;
 using WfpBotConsole.Resources;
 
 namespace WfpBotConsole.Services
 {
+	[Inject(RegistrationScope.Singleton)]
 	public class AutoReplyService : IAutoReplyService
 	{
 		private readonly ITelegramBotClient _telegramBotClient;

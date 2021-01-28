@@ -1,9 +1,11 @@
 ﻿using System.Threading.Tasks;
 using Telegram.Bot;
+using WfpBotConsole.Core.Attributes;
 using WfpBotConsole.DB;
 
 namespace WfpBotConsole.Commands
 {
+	[Inject]
 	public class ShowUsersCommand : ICommand
 	{
 		private readonly ITelegramBotClient _telegramBotClient;

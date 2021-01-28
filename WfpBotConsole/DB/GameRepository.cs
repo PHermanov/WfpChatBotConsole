@@ -3,10 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WfpBotConsole.Core.Attributes;
 using WfpBotConsole.Models;
 
 namespace WfpBotConsole.DB
 {
+	[Inject]
 	public class GameRepository : IGameRepository
 	{
 		private readonly IGameContext _gameContext;

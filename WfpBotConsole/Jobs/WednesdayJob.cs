@@ -2,12 +2,14 @@
 using System;
 using System.Threading.Tasks;
 using Telegram.Bot;
+using WfpBotConsole.Core.Attributes;
 using WfpBotConsole.DB;
 using WfpBotConsole.Resources;
 using WfpBotConsole.Stickers;
 
 namespace WfpBotConsole.Jobs
 {
+	[Inject]
 	public class WednesdayJob : IScheduleJob
 	{
 		private readonly IGameRepository _repository;
