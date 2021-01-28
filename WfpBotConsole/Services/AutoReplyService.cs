@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
@@ -18,7 +19,11 @@ namespace WfpBotConsole.Services
 
 		public async Task AutoReplyAsync(Message message)
 		{
-			var answer = AutoReply.ResourceManager.GetString(message.Text.Trim().ToLower());
+			var preparedText = new Regex("[ !?]")
+				.Replace(message.Text, string.Empty)
+				.ToLower();
+
+			var answer = AutoReply.ResourceManager.GetString(preparedText);
 
 			if (!string.IsNullOrEmpty(answer))
 			{
