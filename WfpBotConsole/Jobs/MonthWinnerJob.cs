@@ -103,24 +103,30 @@ namespace WfpBotConsole.Jobs
 
 				// add month and year text to avatar
 				using var gp = new GraphicsPath();
-				var stringFormat = new StringFormat
-				{
-					Alignment = StringAlignment.Center,
-					LineAlignment = StringAlignment.Center
-				};
 
-				float fontSize = 60;
+				float fontSize = bowlHeight / 4;
 				using var font = new Font("Impact", fontSize, FontStyle.Bold, GraphicsUnit.Pixel);
 
+				var monthString = DateTime.Today.ToString("MMMM", new System.Globalization.CultureInfo("en-US"));
+				var yearString = DateTime.Today.ToString("yyyy");
+
 				gp.AddString(
-					DateTime.Today.ToString($"MMMM{Environment.NewLine}yyyy", new System.Globalization.CultureInfo("en-US")),
+					monthString,
 					font.FontFamily,
 					(int)font.Style,
 					fontSize,
-					new Rectangle(hPadding + bowlWidth, bitmap.Height - bowlHeight - vPadding, bitmap.Width - bowlWidth - hPadding, bowlHeight),
-					stringFormat);
+					new Point(hPadding + bowlWidth + ((bitmap.Width - (hPadding + bowlWidth) - (int)canvas.MeasureString(monthString, font).Width) / 2), bitmap.Height - (vPadding + (bowlHeight / 2) + font.Height)),
+					null);
 
-				canvas.DrawPath(new Pen(Color.Black, 8) { LineJoin = LineJoin.Round }, gp);
+				gp.AddString(
+					yearString,
+					font.FontFamily,
+					(int)font.Style,
+					fontSize,
+					new Point(hPadding + bowlWidth + ((bitmap.Width - (hPadding + bowlWidth) - (int)canvas.MeasureString(yearString, font).Width) / 2), bitmap.Height - (vPadding + (bowlHeight / 2))),
+					null);
+
+				canvas.DrawPath(new Pen(Color.Black, 10) { LineJoin = LineJoin.Round }, gp);
 				canvas.FillPath(Brushes.White, gp);
 
 				canvas.Save();

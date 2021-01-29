@@ -24,11 +24,11 @@ namespace WfpBotConsole.Commands
 
 		public async Task Execute(long chatId)
 		{
-			await _telegramBotClient.TrySendTextMessageAsync(chatId, $"Хуест!", ParseMode.Markdown);
-			await _telegramBotClient.TrySendStickerAsync(chatId, StickersSelector.SelectRandomFromSet(StickersSelector.SticketSet.Yoba));
+			//await _telegramBotClient.TrySendTextMessageAsync(chatId, $"Хуест!", ParseMode.Markdown);
+			//await _telegramBotClient.TrySendStickerAsync(chatId, StickersSelector.SelectRandomFromSet(StickersSelector.SticketSet.Yoba));
 
-			//var monthJob = new MonthWinnerJob(_gameRepository, _telegramBotClient);
-			//await monthJob.Execute(chatId);
+			var monthJob = new MonthWinnerJob(_gameRepository, _telegramBotClient);
+			await monthJob.Execute(chatId);
 		}
 	}
 }
