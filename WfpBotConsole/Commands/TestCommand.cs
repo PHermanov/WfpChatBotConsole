@@ -14,7 +14,7 @@ namespace WfpBotConsole.Commands
 		private readonly ITelegramBotClient _telegramBotClient;
 		private readonly IGameRepository _gameRepository;
 
-		public string CommandKey => "/test";
+		public string CommandKey => "/iddqd";
 
 		public TestCommand(ITelegramBotClient telegramBotClient, IGameRepository gameRepository)
 		{
