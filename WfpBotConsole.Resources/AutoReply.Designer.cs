@@ -95,5 +95,14 @@ namespace WfpBotConsole.Resources {
                 return ResourceManager.GetString("нет", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Джигурда!.
+        /// </summary>
+        public static string пизда {
+            get {
+                return ResourceManager.GetString("пизда", resourceCulture);
+            }
+        }
     }
 }

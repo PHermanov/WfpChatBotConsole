@@ -129,4 +129,7 @@
   <data name="нет" xml:space="preserve">
     <value>Пидора ответ!</value>
   </data>
+  <data name="пизда" xml:space="preserve">
+    <value>Джигурда!</value>
+  </data>
 </root>
