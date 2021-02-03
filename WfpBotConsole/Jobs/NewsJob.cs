@@ -30,9 +30,17 @@ namespace WfpBotConsole.Jobs
 
 		public async void Execute()
 		{
+			Console.ForegroundColor = ConsoleColor.Yellow;
+
+			Console.WriteLine("Executing NewsJob");
+
 			var allChatIds = await _gameRepository.GetAllChatsIdsAsync();
 
+			Console.WriteLine("IDs: " + string.Join(',', allChatIds));
+
 			await Execute(allChatIds);
+
+			Console.ForegroundColor = ConsoleColor.Gray;
 		}
 
 		public async Task Execute(params long[] chatIds)
@@ -47,6 +55,8 @@ namespace WfpBotConsole.Jobs
 				{
 					foreach (var line in news)
 					{
+						Console.WriteLine("Sending " + line+ " to Chat: " + chatIds[i]);
+
 						await _telegramBotClient.TrySendTextMessageAsync(chatIds[i], line, ParseMode.Markdown);
 					}
 				}
