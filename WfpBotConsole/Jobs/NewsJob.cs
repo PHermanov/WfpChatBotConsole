@@ -47,15 +47,23 @@ namespace WfpBotConsole.Jobs
 		{
 			try
 			{
-				var news = _newsServices
-					.Select(async (s) => await s.GetNewsAsync())
-					.SelectMany(s => s.Result);
+				var news = new List<string>();
+
+				foreach (var newsService in _newsServices)
+				{
+					news.AddRange(await newsService.GetNewsAsync());
+				}
+
+				if (!news.Any())
+				{
+					return;
+				}
 
 				for (int i = 0; i < chatIds.Length; i++)
 				{
 					foreach (var line in news)
 					{
-						Console.WriteLine("Sending " + line+ " to Chat: " + chatIds[i]);
+						Console.WriteLine("Sending " + line + " to Chat: " + chatIds[i]);
 
 						await _telegramBotClient.TrySendTextMessageAsync(chatIds[i], line, ParseMode.Markdown);
 					}
@@ -70,7 +78,7 @@ namespace WfpBotConsole.Jobs
 
 		public void Schedule()
 		{
-			JobManager.AddJob(this, s => s.WithName(nameof(NewsJob)).ToRunEvery(0).Hours().Between(9, 0, 21, 0));
+			JobManager.AddJob(this, s => s.WithName(nameof(NewsJob)).ToRunEvery(0).Hours().At(0).Between(9, 0, 21, 0));
 		}
 	}
 }
