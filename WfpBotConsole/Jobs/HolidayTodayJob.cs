@@ -79,7 +79,7 @@ namespace WfpBotConsole.Jobs
 
 		public void Schedule()
 		{
-			JobManager.AddJob(this, s => s.ToRunEvery(0).Days().At(10, 30));
+			JobManager.AddJob(this, s => s.WithName(nameof(HolidayTodayJob)).ToRunEvery(0).Days().At(10, 30));
 		}
 	}
 }

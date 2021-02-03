@@ -60,7 +60,7 @@ namespace WfpBotConsole.Jobs
 
 		public void Schedule()
 		{
-			JobManager.AddJob(this, s => s.ToRunEvery(0).Hours().Between(9, 0, 21, 0));
+			JobManager.AddJob(this, s => s.WithName(nameof(NewsJob)).ToRunEvery(0).Hours().Between(9, 0, 21, 0));
 		}
 	}
 }
