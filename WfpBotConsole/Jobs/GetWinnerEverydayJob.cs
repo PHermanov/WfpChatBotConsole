@@ -44,7 +44,7 @@ namespace WfpBotConsole.Jobs
 
 		public void Schedule()
 		{
-			JobManager.AddJob(this, s => s.ToRunEvery(0).Days().At(12, 00));
+			JobManager.AddJob(this, s => s.WithName(nameof(GetWinnerEverydayJob)).ToRunEvery(0).Days().At(12, 00));
 		}
 	}
 }

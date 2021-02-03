@@ -3,5 +3,7 @@
 	public interface IJobManagerHelper
 	{
 		void ScheduleJobs();
+
+		void Stop();
 	}
 }

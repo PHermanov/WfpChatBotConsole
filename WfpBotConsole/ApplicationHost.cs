@@ -10,6 +10,7 @@ namespace WfpBotConsole
 	public class ApplicationHost
 	{
 		private ITelegramBotService _telegramBotService;
+		private IJobManagerHelper _jobManagerHelper;
 
 		public Task Run()
 		{
@@ -19,10 +20,10 @@ namespace WfpBotConsole
 			hostApplicationLifetime.ApplicationStopping.Register(OnApplicationStopping);
 
 			_telegramBotService = host.Services.GetService<ITelegramBotService>();
-			var jobManagerHelper = host.Services.GetService<IJobManagerHelper>();
+			_jobManagerHelper = host.Services.GetService<IJobManagerHelper>();
 
 			_telegramBotService.Start();
-			jobManagerHelper.ScheduleJobs();
+			_jobManagerHelper.ScheduleJobs();
 
 			return host.RunAsync();
 		}
@@ -46,6 +47,7 @@ namespace WfpBotConsole
 		private void OnApplicationStopping()
 		{
 			_telegramBotService.Stop();
+			_jobManagerHelper.Stop();
 		}
 	}
 }

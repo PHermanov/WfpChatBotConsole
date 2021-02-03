@@ -1,5 +1,7 @@
 ﻿using FluentScheduler;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using WfpBotConsole.Core.Attributes;
 using WfpBotConsole.Core.Enums;
 
@@ -23,6 +25,13 @@ namespace WfpBotConsole.Jobs
 			}
 
 			JobManager.Initialize();
+
+			Console.WriteLine(string.Join(Environment.NewLine, JobManager.AllSchedules.Select(s => $"Job: {s.Name} Next run: {s.NextRun:G}")));
+		}
+
+		public void Stop()
+		{
+			JobManager.StopAndBlock();
 		}
 	}
 }
