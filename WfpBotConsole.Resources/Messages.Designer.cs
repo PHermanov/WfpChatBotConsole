@@ -106,6 +106,15 @@ namespace WfpBotConsole.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to *Свежая дичь, господа*!.
+        /// </summary>
+        public static string NewDich {
+            get {
+                return ResourceManager.GetString("NewDich", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Опа, новый Пидор в игре! Поприветствуем @{0} !.
         /// </summary>
         public static string NewPlayerAdded {

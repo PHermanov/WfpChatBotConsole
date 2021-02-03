@@ -132,6 +132,9 @@
   <data name="MonthWinner" xml:space="preserve">
     <value>По версии этого казино *пидором месяца* становится </value>
   </data>
+  <data name="NewDich" xml:space="preserve">
+    <value>*Свежая дичь, господа*!</value>
+  </data>
   <data name="NewPlayerAdded" xml:space="preserve">
     <value>Опа, новый Пидор в игре! Поприветствуем @{0} !</value>
   </data>
