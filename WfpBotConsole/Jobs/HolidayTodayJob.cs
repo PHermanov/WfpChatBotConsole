@@ -1,4 +1,5 @@
 ﻿using FluentScheduler;
+using Flurl.Http;
 using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
@@ -66,8 +67,7 @@ namespace WfpBotConsole.Jobs
 
 		private async Task<IEnumerable<string>> GetHolidays()
 		{
-			using var webClient = new WebClient();
-			var html = await webClient.DownloadStringTaskAsync("https://kakoysegodnyaprazdnik.com/");
+			var html = await "https://kakoysegodnyaprazdnik.com/".GetStringAsync();
 
 			var doc = new HtmlDocument();
 			doc.LoadHtml(html);
