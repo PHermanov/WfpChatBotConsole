@@ -16,7 +16,7 @@ namespace WfpBotConsole.Services.News
 	{
 		private const string DichURL = "https://disgustingmen.com/tag/dich/";
 
-		private DateTime LastDichNewsDate { get; set; }
+		private DateTime LastDichNewsDate { get; set; } = DateTime.UtcNow;
 
 		public async Task<IEnumerable<string>> GetNewsAsync(CancellationToken cancellationToken = default)
 		{
@@ -57,23 +57,10 @@ namespace WfpBotConsole.Services.News
 
 			if (news.Any())
 			{
-				if (LastDichNewsDate == default)
-				{
-					var lastNews = news.First();
-
-					LastDichNewsDate = lastNews.EntryDate;
-
-					return new[] { $"{Messages.NewDich}{Environment.NewLine}{lastNews.Url}" };
-				}
-				else
-				{
-					LastDichNewsDate = news.First().EntryDate;
-
-					return news.Select(n => $"{Messages.NewDich}{Environment.NewLine}{n.Url}");
-				}
+				LastDichNewsDate = news.First().EntryDate;
 			}
 
-			return Enumerable.Empty<string>();
+			return news.Select(n => $"{Messages.NewDich}{Environment.NewLine}{n.Url}");
 		}
 	}
 }
