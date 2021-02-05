@@ -1,7 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Threading.Tasks;
 using WfpBotConsole.Bootstrap;
+using WfpBotConsole.DB;
 using WfpBotConsole.Jobs;
 using WfpBotConsole.Services;
 
@@ -40,6 +42,7 @@ namespace WfpBotConsole
 			IServiceCollection serviceCollection)
 		{
 			serviceCollection
+				.AddDataBase()
 				.AddTelegramBotClient()
 				.AddInjectedServices();
 		}
