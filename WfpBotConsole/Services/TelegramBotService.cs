@@ -84,6 +84,8 @@ namespace WfpBotConsole.Services
 
 				await _autoReplyService.AutoReplyAsync(e.Message);
 
+				await _autoReplyService.AutoMentionAsync(e.Message);
+
 				if (text.StartsWith(@"/"))
 				{
 					await _commandsService.Execute(e.Message.Chat.Id, text);

@@ -106,7 +106,7 @@ namespace WfpBotConsole.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Джигурда!.
+        ///   Looks up a localized string similar to Джигурда! 🧔.
         /// </summary>
         public static string пизда {
             get {
