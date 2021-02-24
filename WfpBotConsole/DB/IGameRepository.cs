@@ -17,6 +17,7 @@ namespace WfpBotConsole.DB
 		Task<GameResult> GetTodayResultAsync(long chatId);
 		Task<List<PlayerCountViewModel>> GetTopWinnersForMonthAsync(long chatId, int top, DateTime date);
 		Task<PlayerCountViewModel> GetWinnerForMonthAsync(long chatId, DateTime date);
+		Task<List<PlayerCountViewModel>> GetAllWinnersForMonthAsync(long chatId, DateTime date);
 		Task<GameResult> GetYesterdayResultAsync(long chatId);
 		Task SaveGameResultAsync(GameResult result);
 	}

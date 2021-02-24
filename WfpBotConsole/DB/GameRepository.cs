@@ -71,6 +71,9 @@ namespace WfpBotConsole.DB
 		public async Task<List<PlayerCountViewModel>> GetTopWinnersForMonthAsync(long chatId, int top, DateTime date)
 			=> await GetMonthResults(chatId, date).Take(top).ToListAsync();
 
+		public async Task<List<PlayerCountViewModel>> GetAllWinnersForMonthAsync(long chatId, DateTime date)
+			=> await GetMonthResults(chatId, date).ToListAsync();
+
 		public async Task<PlayerCountViewModel> GetWinnerForMonthAsync(long chatId, DateTime date)
 			=> await GetMonthResults(chatId, date).FirstOrDefaultAsync();
 

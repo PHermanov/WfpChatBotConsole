@@ -61,6 +61,15 @@ namespace WfpBotConsole.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to *Все пидороы месяца!*.
+        /// </summary>
+        public static string AllMonthWinners {
+            get {
+                return ResourceManager.GetString("AllMonthWinners", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Все наши славные *пидоры*!.
         /// </summary>
         public static string AllWinners {
