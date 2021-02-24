@@ -6,5 +6,7 @@ namespace WfpBotConsole.Services
 	public interface IAutoReplyService
 	{
 		Task AutoReplyAsync(Message message);
+
+		Task AutoMentionAsync(Message message);
 	}
 }

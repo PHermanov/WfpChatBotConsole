@@ -106,6 +106,11 @@ namespace WfpBotConsole
 		public static string GetUserMention(this PlayerCountViewModel player)
 			=> CreateUserMention(player.UserName, player.UserId);
 
+		public static string GetUsersMention(this IEnumerable<Player> players)
+		{
+			return string.Join(" ", players.Select(player => CreateUserMention(player.UserName, player.UserId)));
+		}
+
 		private static string CreateUserMention(string userName, int userId)
 			=> @$"[{userName}](tg://user?id={userId})";
 	}
