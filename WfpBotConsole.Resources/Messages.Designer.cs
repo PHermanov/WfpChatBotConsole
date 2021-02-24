@@ -106,7 +106,7 @@ namespace WfpBotConsole.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to *Свежая дичь, господа*!.
+        ///   Looks up a localized string similar to *Свежая дичь, господа!*.
         /// </summary>
         public static string NewDich {
             get {
@@ -120,6 +120,15 @@ namespace WfpBotConsole.Resources {
         public static string NewPlayerAdded {
             get {
                 return ResourceManager.GetString("NewPlayerAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to *Ебанутый тест, господа!*.
+        /// </summary>
+        public static string NewTest {
+            get {
+                return ResourceManager.GetString("NewTest", resourceCulture);
             }
         }
         

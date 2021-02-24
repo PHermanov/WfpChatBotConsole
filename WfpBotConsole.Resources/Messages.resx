@@ -133,10 +133,13 @@
     <value>По версии этого казино *пидором месяца* становится </value>
   </data>
   <data name="NewDich" xml:space="preserve">
-    <value>*Свежая дичь, господа*!</value>
+    <value>*Свежая дичь, господа!*</value>
   </data>
   <data name="NewPlayerAdded" xml:space="preserve">
     <value>Опа, новый Пидор в игре! Поприветствуем @{0} !</value>
+  </data>
+  <data name="NewTest" xml:space="preserve">
+    <value>*Ебанутый тест, господа!*</value>
   </data>
   <data name="NewWinner" xml:space="preserve">
     <value>Иииии *пидор дня* сегодня {0} !</value>
