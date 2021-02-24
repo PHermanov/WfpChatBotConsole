@@ -126,6 +126,9 @@
   <data name="да" xml:space="preserve">
     <value>Пизда!</value>
   </data>
+  <data name="не" xml:space="preserve">
+    <value>🤚🏿💩</value>
+  </data>
   <data name="нет" xml:space="preserve">
     <value>Пидора ответ!</value>
   </data>

@@ -88,6 +88,15 @@ namespace WfpBotConsole.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 🤚🏿💩.
+        /// </summary>
+        public static string не {
+            get {
+                return ResourceManager.GetString("не", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Пидора ответ!.
         /// </summary>
         public static string нет {
