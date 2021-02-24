@@ -61,7 +61,7 @@ namespace WfpBotConsole.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to *Все пидороы месяца!*.
+        ///   Looks up a localized string similar to *Все пидоры месяца!*.
         /// </summary>
         public static string AllMonthWinners {
             get {
