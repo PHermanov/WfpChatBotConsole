@@ -65,7 +65,7 @@ namespace WfpBotConsole.Services.News
 
 		private async Task<IEnumerable<PostModel>> GetPosts(
 			string url,
-			DateTime entryDate,
+			DateTime lastEntryDate,
 			CancellationToken cancellationToken)
 		{
 			var html = await url.GetStringAsync(cancellationToken);
@@ -81,7 +81,7 @@ namespace WfpBotConsole.Services.News
 					EntryDate = DateTime.Parse(n.SelectSingleNode("div[contains(@class, 'post-info')]/div[contains(@class, 'info')]/time[contains(@class, 'entry-date')]").GetAttributeValue("datetime", DateTime.UtcNow.ToString())),
 					Url = n.SelectSingleNode("header[contains(@class, 'entry-header')]/h2[contains(@class, 'entry-title')]/a").GetAttributeValue("href", string.Empty)
 				})
-				.Where(n => !string.IsNullOrEmpty(n.Url) && n.EntryDate > entryDate)
+				.Where(n => !string.IsNullOrEmpty(n.Url) && n.EntryDate > lastEntryDate)
 				.OrderByDescending(n => n.EntryDate)
 				.ToList();
 		}
