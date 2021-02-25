@@ -8,7 +8,7 @@ namespace WfpBotConsole.Bootstrap
 	{
 		public static IServiceCollection AddTelegramBotClient(this IServiceCollection serviceCollection)
 		{
-			serviceCollection.AddSingleton<ITelegramBotClient>(new TelegramBotClient(File.ReadAllText("key.secret")));
+			serviceCollection.AddSingleton<ITelegramBotClient>(_ => new TelegramBotClient(File.ReadAllText("key.secret")));
 
 			return serviceCollection;
 		}

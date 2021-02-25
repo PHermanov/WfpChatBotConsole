@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using Microsoft.Extensions.Hosting;
+using System.Threading.Tasks;
 
 namespace WfpBotConsole
 {
@@ -6,7 +7,12 @@ namespace WfpBotConsole
 	{
 		static Task Main(string[] args)
 		{
-			return new ApplicationHost().Run();
+			return ApplicationHost.Run(args);
+		}
+
+		static IHostBuilder CreateHostBuilder(string[] args)
+		{ 
+			return ApplicationHost.CreateHostBuilder(args);
 		}
 	}
 }

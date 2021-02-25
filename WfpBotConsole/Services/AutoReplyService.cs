@@ -12,7 +12,7 @@ using WfpBotConsole.Resources;
 
 namespace WfpBotConsole.Services
 {
-	[Inject(RegistrationScope.Singleton)]
+	[Inject]
 	public class AutoReplyService : IAutoReplyService
 	{
 		private readonly ITelegramBotClient _telegramBotClient;

@@ -9,14 +9,14 @@ using WfpBotConsole.Services;
 
 namespace WfpBotConsole
 {
-	public class ApplicationHost
+	public static class ApplicationHost
 	{
-		private ITelegramBotService _telegramBotService;
-		private IJobManagerHelper _jobManagerHelper;
+		private static ITelegramBotService _telegramBotService;
+		private static IJobManagerHelper _jobManagerHelper;		
 
-		public Task Run()
+		public static Task Run(string[] args)
 		{
-			var host = CreateHostBuilder().Build();
+			var host = CreateHostBuilder(args).Build();
 
 			var hostApplicationLifetime = host.Services.GetService<IHostApplicationLifetime>();
 			hostApplicationLifetime.ApplicationStopping.Register(OnApplicationStopping);
@@ -30,24 +30,24 @@ namespace WfpBotConsole
 			return host.RunAsync();
 		}
 
-		private IHostBuilder CreateHostBuilder()
+		public static IHostBuilder CreateHostBuilder(string[] args)
 		{
 			return Host
-				.CreateDefaultBuilder()
+				.CreateDefaultBuilder(args)
 				.ConfigureServices(ConfigureServices);
 		}
 
-		private void ConfigureServices(
+		private static void ConfigureServices(
 			HostBuilderContext hostBuilderContext,
 			IServiceCollection serviceCollection)
 		{
 			serviceCollection
-				.AddDataBase()
+				.AddDbContext<GameContext>(s => s.UseSqlite("Data Source=game.db"))
 				.AddTelegramBotClient()
 				.AddInjectedServices();
 		}
 
-		private void OnApplicationStopping()
+		private static void OnApplicationStopping()
 		{
 			_telegramBotService.Stop();
 			_jobManagerHelper.Stop();
