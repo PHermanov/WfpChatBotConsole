@@ -7,7 +7,7 @@ using WfpBotConsole.Core.Enums;
 
 namespace WfpBotConsole.Jobs
 {
-	[Inject(RegistrationScope.Singleton)]
+	[Inject]
 	public class JobManagerHelper : IJobManagerHelper
 	{
 		private readonly IEnumerable<IScheduleJob> _jobs;

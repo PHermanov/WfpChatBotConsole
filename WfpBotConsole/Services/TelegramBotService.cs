@@ -10,7 +10,7 @@ using WfpBotConsole.Resources;
 
 namespace WfpBotConsole.Services
 {
-	[Inject(RegistrationScope.Singleton)]
+	[Inject]
 	public class TelegramBotService : ITelegramBotService
 	{
 		private readonly ITelegramBotClient _telegramBotClient;

@@ -7,7 +7,7 @@ using WfpBotConsole.Core.Enums;
 
 namespace WfpBotConsole.Services
 {
-	[Inject(RegistrationScope.Singleton)]
+	[Inject]
 	public class CommandsService : ICommandsService
 	{
 		private readonly IEnumerable<ICommand> _commands;
