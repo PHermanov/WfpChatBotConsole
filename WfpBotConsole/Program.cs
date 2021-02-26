@@ -11,7 +11,7 @@ namespace WfpBotConsole
 		}
 
 		static IHostBuilder CreateHostBuilder(string[] args)
-		{ 
+		{
 			return ApplicationHost.CreateHostBuilder(args);
 		}
 	}

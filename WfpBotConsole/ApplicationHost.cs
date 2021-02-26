@@ -12,7 +12,7 @@ namespace WfpBotConsole
 	public static class ApplicationHost
 	{
 		private static ITelegramBotService _telegramBotService;
-		private static IJobManagerHelper _jobManagerHelper;		
+		private static IJobManagerHelper _jobManagerHelper;
 
 		public static Task Run(string[] args)
 		{
