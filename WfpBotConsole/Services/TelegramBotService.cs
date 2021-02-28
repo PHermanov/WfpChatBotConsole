@@ -78,7 +78,6 @@ namespace WfpBotConsole.Services
 
 				if (newPlayer)
 				{
-					// await _telegramBotClient.TrySendTextMessageAsync(chatId, string.Format(Messages.NewPlayerAdded, name));
 					Console.WriteLine(string.Format(Messages.NewPlayerAdded, userName));
 				}
 

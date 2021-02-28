@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using WfpBotConsole.Commands;
 using WfpBotConsole.Core.Attributes;
-using WfpBotConsole.Core.Enums;
 
 namespace WfpBotConsole.Services
 {
@@ -23,12 +22,10 @@ namespace WfpBotConsole.Services
 
 			var command = _commands.FirstOrDefault(c => c.CommandKey == commandKeyLowered);
 
-			if (command == null)
+			if (command != null)
 			{
-				command = _commands.FirstOrDefault(c => c.GetType() == typeof(HelpCommand));
+				await command.Execute(chatId);
 			}
-
-			await command.Execute(chatId);
 		}
 	}
 }
