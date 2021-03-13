@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using WfpBotConsole.Models;
 
-namespace WfpBotConsole.DB
+namespace WfpBotConsole.Data
 {
 	public interface IGameRepository
 	{

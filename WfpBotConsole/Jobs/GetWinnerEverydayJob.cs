@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WfpBotConsole.Commands;
 using WfpBotConsole.Core.Attributes;
-using WfpBotConsole.DB;
+using WfpBotConsole.Data;
 
 namespace WfpBotConsole.Jobs
 {

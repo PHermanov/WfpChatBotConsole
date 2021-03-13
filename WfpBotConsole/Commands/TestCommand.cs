@@ -2,8 +2,9 @@
 using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
+using Telegram.Bot.Types.ReplyMarkups;
 using WfpBotConsole.Core.Attributes;
-using WfpBotConsole.DB;
+using WfpBotConsole.Data;
 using WfpBotConsole.Jobs;
 using WfpBotConsole.Services.News;
 using WfpBotConsole.Stickers;
@@ -32,8 +33,28 @@ namespace WfpBotConsole.Commands
 
 		public async Task Execute(long chatId)
 		{
-			await _telegramBotClient.TrySendTextMessageAsync(chatId, $"Хуест!", ParseMode.Markdown);
-			await _telegramBotClient.TrySendStickerAsync(chatId, StickersSelector.SelectRandomFromSet(StickersSelector.SticketSet.Yoba));
+			var markup = new ReplyKeyboardMarkup()
+			{
+				Keyboard = new[]
+				{
+					new[] { new KeyboardButton("test"), new KeyboardButton("test 1") }
+				},
+				OneTimeKeyboard = true,
+				ResizeKeyboard = true
+			};
+
+			var removeMarkup = new ReplyKeyboardRemove();
+
+			var messageMarkup = new InlineKeyboardMarkup(new InlineKeyboardButton()
+			{
+				//Url = "https://stackoverflow.com",
+				Text = "test",
+				CallbackData = "asd"
+			});
+
+
+			await _telegramBotClient.TrySendTextMessageAsync(chatId, $"Хуест!", ParseMode.Markdown, replyMarkup: messageMarkup);
+			//await _telegramBotClient.TrySendStickerAsync(chatId, StickersSelector.SelectRandomFromSet(StickersSelector.SticketSet.Yoba));
 
 			//var monthJob = new MonthWinnerJob(_gameRepository, _telegramBotClient);
 			//await monthJob.Execute(chatId);

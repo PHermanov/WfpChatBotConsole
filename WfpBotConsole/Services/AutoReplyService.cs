@@ -6,8 +6,7 @@ using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using WfpBotConsole.Core.Attributes;
-using WfpBotConsole.Core.Enums;
-using WfpBotConsole.DB;
+using WfpBotConsole.Data;
 using WfpBotConsole.Resources;
 
 namespace WfpBotConsole.Services

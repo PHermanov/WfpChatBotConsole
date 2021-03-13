@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
 using WfpBotConsole.Core.Attributes;
-using WfpBotConsole.DB;
+using WfpBotConsole.Data;
 using WfpBotConsole.Services.News;
 
 namespace WfpBotConsole.Jobs

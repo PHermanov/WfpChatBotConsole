@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using WfpBotConsole.Bootstrap;
-using WfpBotConsole.DB;
+using WfpBotConsole.Data;
 using WfpBotConsole.Jobs;
 using WfpBotConsole.Services;
 
@@ -42,7 +44,13 @@ namespace WfpBotConsole
 			IServiceCollection serviceCollection)
 		{
 			serviceCollection
-				.AddDbContext<GameContext>(s => s.UseSqlite("Data Source=game.db"))
+				.AddDbContext<ApplicationDbContext>(s =>
+				{
+					s.UseSqlite("Data Source=game.db");
+					s.ConfigureWarnings(wcb => wcb.Log(
+						(RelationalEventId.CommandExecuting, LogLevel.Debug),
+						(RelationalEventId.CommandExecuted, LogLevel.Debug)));
+				})
 				.AddTelegramBotClient()
 				.AddInjectedServices();
 		}

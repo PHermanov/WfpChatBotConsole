@@ -4,12 +4,11 @@ using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
 using WfpBotConsole.Core.Attributes;
-using WfpBotConsole.DB;
+using WfpBotConsole.Data;
 using WfpBotConsole.Resources;
 
 namespace WfpBotConsole.Jobs

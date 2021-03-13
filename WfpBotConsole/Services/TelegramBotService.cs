@@ -1,11 +1,11 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types.Enums;
 using WfpBotConsole.Core.Attributes;
-using WfpBotConsole.Core.Enums;
-using WfpBotConsole.DB;
+using WfpBotConsole.Data;
 using WfpBotConsole.Resources;
 
 namespace WfpBotConsole.Services
@@ -29,9 +29,9 @@ namespace WfpBotConsole.Services
 			_commandsService = commandsService;
 			_autoReplyService = autoReplyService;
 
-			_telegramBotClient.OnMessage += Bot_OnMessage;
-			_telegramBotClient.OnReceiveError += Client_OnReceiveError;
-			_telegramBotClient.OnReceiveGeneralError += Client_OnReceiveGeneralError;
+			_telegramBotClient.OnMessage += OnMessage;
+			_telegramBotClient.OnReceiveError += OnReceiveError;
+			_telegramBotClient.OnReceiveGeneralError += OnReceiveGeneralError;
 		}
 
 		public async Task Start()
@@ -47,49 +47,109 @@ namespace WfpBotConsole.Services
 			_telegramBotClient.StopReceiving();
 		}
 
-		private void Client_OnReceiveGeneralError(object sender, ReceiveGeneralErrorEventArgs e)
+		private void OnReceiveError(object sender, ReceiveErrorEventArgs e)
 		{
-			Console.WriteLine(nameof(Client_OnReceiveGeneralError));
-			Console.WriteLine(e.Exception.Message);
-		}
-
-		private void Client_OnReceiveError(object sender, ReceiveErrorEventArgs e)
-		{
-			Console.WriteLine(nameof(Client_OnReceiveError));
+			Console.WriteLine(nameof(OnReceiveError));
 			Console.WriteLine(e.ApiRequestException.Message);
 		}
 
-		private async void Bot_OnMessage(object sender, MessageEventArgs e)
+		private void OnReceiveGeneralError(object sender, ReceiveGeneralErrorEventArgs e)
 		{
-			if (!e.Message.From.IsBot && e.Message.Type == MessageType.Text && !string.IsNullOrWhiteSpace(e.Message.Text))
+			Console.WriteLine(nameof(OnReceiveGeneralError));
+			Console.WriteLine(e.Exception.Message);
+		}
+
+		private async void OnMessage(object sender, MessageEventArgs e)
+		{
+			if (!e.Message.From.IsBot)
 			{
-				var chatId = e.Message.Chat.Id;
-				var userName = e.Message.From.Username;
-				var text = e.Message.Text;
-
-				Console.WriteLine($"Received a message in chat {chatId}. {userName} : {text}");
-
-				if (string.IsNullOrWhiteSpace(userName))
+				switch (e.Message.Type)
 				{
-					userName = e.Message.From.FirstName + " " + e.Message.From.LastName;
-				}
-
-				var newPlayer = await _gameRepository.CheckPlayerAsync(chatId, e.Message.From.Id, userName);
-
-				if (newPlayer)
-				{
-					Console.WriteLine(string.Format(Messages.NewPlayerAdded, userName));
-				}
-
-				await _autoReplyService.AutoReplyAsync(e.Message);
-
-				await _autoReplyService.AutoMentionAsync(e.Message);
-
-				if (text.StartsWith(@"/"))
-				{
-					await _commandsService.Execute(e.Message.Chat.Id, text);
+					case MessageType.Text:
+						{
+							await ProcessTextMessage(sender, e);
+							break;
+						}
+					case MessageType.ChatMembersAdded:
+						{
+							await ProcessChatMembersAddedMessage(sender, e);
+							break;
+						}
+					case MessageType.ChatMemberLeft:
+						{
+							await ProcessChatMemberLeftMessage(sender, e);
+							break;
+						}
 				}
 			}
+		}
+
+		private async Task ProcessTextMessage(object sender, MessageEventArgs e)
+		{
+			var chatId = e.Message.Chat.Id;
+			var userName = e.Message.From.Username;
+			var text = e.Message.Text;
+
+			Console.WriteLine($"Received a message in chat {chatId}. {userName} : {text}");
+
+			if (string.IsNullOrWhiteSpace(userName))
+			{
+				userName = e.Message.From.FirstName + " " + e.Message.From.LastName;
+			}
+
+			var newPlayer = await _gameRepository.CheckPlayerAsync(chatId, e.Message.From.Id, userName);
+
+			if (newPlayer)
+			{
+				Console.WriteLine(string.Format(Messages.NewPlayerAdded, userName));
+			}
+
+			await _autoReplyService.AutoReplyAsync(e.Message);
+
+			await _autoReplyService.AutoMentionAsync(e.Message);
+
+			if (text.StartsWith(@"/"))
+			{
+				await _commandsService.Execute(e.Message.Chat.Id, text);
+			}
+		}
+
+		private async Task ProcessChatMembersAddedMessage(object sender, MessageEventArgs e)
+		{
+			if (sender is TelegramBotClient tbc)
+			{
+				if (e.Message.NewChatMembers.Any(user => user.Id == tbc.BotId))
+				{
+					// Save new chat info / or restore from archive (check all existing users)
+					// Save requestor user info
+					// Save all other new users from message (except bots)
+					// Save chat admins
+				}
+				else
+				{
+					// Save new users from message 
+					// Greetings
+				}
+			}
+
+			await Task.CompletedTask;
+		}
+
+		private async Task ProcessChatMemberLeftMessage(object sender, MessageEventArgs e)
+		{
+			if (sender is TelegramBotClient tbc)
+			{
+				if (e.Message.LeftChatMember.Id == tbc.BotId)
+				{
+					// Archive chat info
+				}
+				else
+				{
+					// Archive left user
+				}
+			}
+
+			await Task.CompletedTask;
 		}
 	}
 }

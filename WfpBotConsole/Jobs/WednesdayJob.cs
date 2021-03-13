@@ -3,7 +3,7 @@ using System;
 using System.Threading.Tasks;
 using Telegram.Bot;
 using WfpBotConsole.Core.Attributes;
-using WfpBotConsole.DB;
+using WfpBotConsole.Data;
 using WfpBotConsole.Resources;
 using WfpBotConsole.Stickers;
 
