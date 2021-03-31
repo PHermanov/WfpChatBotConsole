@@ -45,7 +45,7 @@ namespace WfpBotConsole.Jobs
             {
                 try
                 {
-                    await _client.TrySendPhotoAsync(chatIds[i], new InputOnlineFile(File.OpenRead("Images/april.png")), @"С первым апреля", ParseMode.Markdown);
+                    await _client.TrySendPhotoAsync(chatIds[i], new InputOnlineFile(File.OpenRead("Images/april.jpg")), @"С первым апреля", ParseMode.Markdown);
                 }
                 catch (Exception e)
                 {
