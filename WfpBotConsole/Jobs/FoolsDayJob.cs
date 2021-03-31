@@ -1,5 +1,6 @@
 ﻿using FluentScheduler;
 using System;
+using System.IO;
 using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
@@ -44,8 +45,7 @@ namespace WfpBotConsole.Jobs
             {
                 try
                 {
-                    // using var image = Image.FromFile("Images/april.png");
-                    await _client.TrySendPhotoAsync(chatIds[i], new InputOnlineFile("Images/april.png"), "message", ParseMode.Markdown);
+                    await _client.TrySendPhotoAsync(chatIds[i], new InputOnlineFile(File.OpenRead("Images/april.png")), @"С первым апреля", ParseMode.Markdown);
                 }
                 catch (Exception e)
                 {
