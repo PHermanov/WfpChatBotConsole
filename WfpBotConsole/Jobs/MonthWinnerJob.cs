@@ -37,7 +37,7 @@ namespace WfpBotConsole.Jobs
 
         public async Task Execute(params long[] chatIds)
         {
-            for (int i = 0; i < chatIds.Length; i++)
+            for (long i = 0; i < chatIds.Length; i++)
             {
                 try
                 {
