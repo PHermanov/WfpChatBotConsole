@@ -56,7 +56,7 @@ namespace WfpBotConsole.Jobs
 
 		public void Schedule()
 		{
-			JobManager.AddJob(this, s => s.WithName(nameof(MonthWinnerJob)).ToRunEvery(0).Months().OnTheLastDay().At(12, 05));
+			JobManager.AddJob(this, s => s.WithName(nameof(MonthWinnerJob)).ToRunEvery(0).Months().OnTheLastDay().At(13, 15));
 		}
 
 		private async Task<Stream> GetWinnerImage(UserProfilePhotos userProfilePhotos)
