@@ -36,7 +36,7 @@ namespace WfpBotConsole.Jobs
 
         public void Schedule()
         {
-            JobManager.AddJob(this, s => s.WithName(nameof(FoolsDayJob)).ToRunEvery(0).Months().On(1).At(9, 30));
+            JobManager.AddJob(this, s => s.WithName(nameof(FoolsDayJob)).ToRunEvery(0).Months().On(0).At(10, 10));
         }
 
         public async Task Execute(params long[] chatIds)
