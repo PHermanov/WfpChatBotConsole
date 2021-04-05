@@ -61,6 +61,15 @@ namespace WfpBotConsole.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to F.
+        /// </summary>
+        public static string f {
+            get {
+                return ResourceManager.GetString("f", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Хуй на!.
         /// </summary>
         public static string а {

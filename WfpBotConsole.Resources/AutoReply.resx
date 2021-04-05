@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="f" xml:space="preserve">
+    <value>F</value>
+  </data>
   <data name="а" xml:space="preserve">
     <value>Хуй на!</value>
   </data>
