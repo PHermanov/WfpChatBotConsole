@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AllMonthWinners" xml:space="preserve">
-    <value>*Все пидоры месяца!*</value>
+    <value>&lt;b&gt;Все пидоры месяца!&lt;/b&gt;</value>
   </data>
   <data name="AllWinners" xml:space="preserve">
-    <value>Все наши славные *пидоры*!</value>
+    <value>Все наши славные &lt;b&gt;пидоры&lt;/b&gt;!</value>
   </data>
   <data name="Congrats" xml:space="preserve">
     <value>Наши вам поздравления!</value>
