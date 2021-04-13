@@ -36,7 +36,7 @@ namespace WfpBotConsole.Commands
 					+ Environment.NewLine
 					+ string.Join(Environment.NewLine, allWinners);
 
-				await _telegramBotClient.TrySendTextMessageAsync(chatId, msg, ParseMode.Markdown);
+				await _telegramBotClient.TrySendTextMessageAsync(chatId, msg, ParseMode.Html);
 			}
 		}
 	}

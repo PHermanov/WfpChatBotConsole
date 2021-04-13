@@ -11,7 +11,7 @@ namespace WfpBotConsole.Models
 
 		public override string ToString()
 		{
-			return $"{UserName}: *{Count}*";
+			return $"<i>{UserName}</i>: <b>{Count}</b>";
 		}
 	}
 }
