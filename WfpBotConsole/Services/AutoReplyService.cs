@@ -6,7 +6,6 @@ using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using WfpBotConsole.Core.Attributes;
-using WfpBotConsole.Core.Enums;
 using WfpBotConsole.DB;
 using WfpBotConsole.Resources;
 
@@ -36,6 +35,13 @@ namespace WfpBotConsole.Services
 
 			if (!string.IsNullOrEmpty(answer))
 			{
+				// multiple answers, pick random
+                if (answer.Contains(";"))
+                {
+                    var answers = answer.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries);
+                    answer = answers[new Random().Next(answers.Length)];
+                }
+
 				await Task.Delay(TimeSpan.FromSeconds(1));
 				await _telegramBotClient.TrySendTextMessageAsync(message.Chat.Id, answer, ParseMode.Markdown, replyToMessageId: message.MessageId);
 			}

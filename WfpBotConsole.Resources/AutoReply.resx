@@ -127,15 +127,18 @@
     <value>Нага ебать! 🦵</value>
   </data>
   <data name="да" xml:space="preserve">
-    <value>Пизда!</value>
+    <value>Пизда!;Пидора еда!;Манда!</value>
   </data>
   <data name="не" xml:space="preserve">
     <value>🤚🏿💩</value>
   </data>
   <data name="нет" xml:space="preserve">
-    <value>Пидора ответ!</value>
+    <value>Пидора ответ!;Говна пакет!;Покукешай винегрет!</value>
   </data>
   <data name="пизда" xml:space="preserve">
     <value>Джигурда! 🧔</value>
+  </data>
+  <data name="шо" xml:space="preserve">
+    <value>Хуй з'їв нашо?</value>
   </data>
 </root>

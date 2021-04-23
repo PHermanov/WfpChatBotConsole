@@ -4,20 +4,20 @@ using System.Linq;
 
 namespace WfpBotConsole.Stickers
 {
-	public class StickersSelector
+	public static class StickersSelector
 	{
-		public enum SticketSet : short
+		public enum StickerSet : short
 		{
 			Yoba,
 			Frog
 		}
 
-		public static string SelectRandomFromSet(SticketSet stickerSet)
+		public static string SelectRandomFromSet(StickerSet stickerSet)
 		{
 			var fileName = stickerSet switch
 			{
-				SticketSet.Yoba => Path.Combine("Stickers", "Yoba", "YobaUrls.txt"),
-				SticketSet.Frog => Path.Combine("Stickers", "Frog", "FrogUrls.txt"),
+				StickerSet.Yoba => Path.Combine("Stickers", "Yoba", "YobaUrls.txt"),
+				StickerSet.Frog => Path.Combine("Stickers", "Frog", "FrogUrls.txt"),
 				_ => string.Empty
 			};
 

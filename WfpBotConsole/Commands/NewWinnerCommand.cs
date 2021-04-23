@@ -54,7 +54,7 @@ namespace WfpBotConsole.Commands
 			var msg = string.Format(messageTemplate, todayResult.GetUserMention());
 
 			await _telegramBotClient.TrySendTextMessageAsync(chatId, msg, ParseMode.Markdown);
-			await _telegramBotClient.TrySendStickerAsync(chatId, StickersSelector.SelectRandomFromSet(StickersSelector.SticketSet.Yoba));
+			await _telegramBotClient.TrySendStickerAsync(chatId, StickersSelector.SelectRandomFromSet(StickersSelector.StickerSet.Yoba));
 		}
 	}
 }

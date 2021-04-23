@@ -88,7 +88,7 @@ namespace WfpBotConsole.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Пизда!.
+        ///   Looks up a localized string similar to Пизда!;Пидора еда!;Манда!.
         /// </summary>
         public static string да {
             get {
@@ -106,7 +106,7 @@ namespace WfpBotConsole.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Пидора ответ!.
+        ///   Looks up a localized string similar to Пидора ответ!;Говна пакет!;Покукешай винегрет!.
         /// </summary>
         public static string нет {
             get {
@@ -120,6 +120,15 @@ namespace WfpBotConsole.Resources {
         public static string пизда {
             get {
                 return ResourceManager.GetString("пизда", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Хуй з&apos;їв нашо?.
+        /// </summary>
+        public static string шо {
+            get {
+                return ResourceManager.GetString("шо", resourceCulture);
             }
         }
     }
