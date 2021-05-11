@@ -159,6 +159,9 @@
   <data name="TodayWinnerAlreadySetUkr" xml:space="preserve">
     <value>Куме, а чув як сьогодні {0} називають? *Піііііііііііііідор*</value>
   </data>
+  <data name="Tomorrow" xml:space="preserve">
+    <value>А сегодня в завтрашний могут смотреть не только лишь все...</value>
+  </data>
   <data name="TopMonthWinners" xml:space="preserve">
     <value>*Топ {0} пидоров месяца!*</value>
   </data>

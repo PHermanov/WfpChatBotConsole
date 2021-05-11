@@ -187,6 +187,15 @@ namespace WfpBotConsole.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to А сегодня в завтрашний могут смотреть не только лишь все....
+        /// </summary>
+        public static string Tomorrow {
+            get {
+                return ResourceManager.GetString("Tomorrow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to *Топ {0} пидоров месяца!*.
         /// </summary>
         public static string TopMonthWinners {
