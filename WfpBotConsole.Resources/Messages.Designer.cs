@@ -187,7 +187,7 @@ namespace WfpBotConsole.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to А сегодня в завтрашний могут смотреть не только лишь все....
+        ///   Looks up a localized string similar to А сегодня в завтрашний день могут смотреть не только лишь все....
         /// </summary>
         public static string Tomorrow {
             get {
