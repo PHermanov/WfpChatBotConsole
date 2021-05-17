@@ -49,9 +49,9 @@ namespace WfpBotConsole.Services
 
 		public async Task AutoMentionAsync(Message message)
 		{
-			var splittedText = message.Text?.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+			var splitText = message.Text?.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
 
-			if (splittedText.Any(w => w.Equals("@all", StringComparison.OrdinalIgnoreCase)))
+			if (splitText.Any(w => w.Equals("@all", StringComparison.OrdinalIgnoreCase)))
 			{
 				var users = (await _gameRepository
 					.GetAllPlayersAsync(message.Chat.Id))

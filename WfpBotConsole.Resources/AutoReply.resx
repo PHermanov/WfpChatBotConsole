@@ -120,11 +120,17 @@
   <data name="f" xml:space="preserve">
     <value>F</value>
   </data>
+  <data name="go" xml:space="preserve">
+    <value>vno</value>
+  </data>
   <data name="а" xml:space="preserve">
     <value>Хуй на!</value>
   </data>
   <data name="ага" xml:space="preserve">
     <value>Нага ебать! 🦵</value>
+  </data>
+  <data name="го" xml:space="preserve">
+    <value>вно</value>
   </data>
   <data name="да" xml:space="preserve">
     <value>Пизда!;Пидора еда!;Манда!</value>
@@ -133,12 +139,18 @@
     <value>🤚🏿💩</value>
   </data>
   <data name="нет" xml:space="preserve">
-    <value>Пидора ответ!;Говна пакет!;Покукешай винегрет!</value>
+    <value>Пидора ответ!;Говна пакет!;Покукешай винегрет!;Купи у бабки табурет!</value>
   </data>
   <data name="пизда" xml:space="preserve">
     <value>Джигурда! 🧔</value>
   </data>
+  <data name="ф" xml:space="preserve">
+    <value>Ф</value>
+  </data>
   <data name="шо" xml:space="preserve">
     <value>Хуй з'їв нашо?</value>
+  </data>
+  <data name="шо вы" xml:space="preserve">
+    <value>Та нишо...</value>
   </data>
 </root>

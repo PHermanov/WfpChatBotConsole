@@ -70,6 +70,15 @@ namespace WfpBotConsole.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to vno.
+        /// </summary>
+        public static string go {
+            get {
+                return ResourceManager.GetString("go", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Хуй на!.
         /// </summary>
         public static string а {
@@ -84,6 +93,15 @@ namespace WfpBotConsole.Resources {
         public static string ага {
             get {
                 return ResourceManager.GetString("ага", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to вно.
+        /// </summary>
+        public static string го {
+            get {
+                return ResourceManager.GetString("го", resourceCulture);
             }
         }
         
@@ -106,7 +124,7 @@ namespace WfpBotConsole.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Пидора ответ!;Говна пакет!;Покукешай винегрет!.
+        ///   Looks up a localized string similar to Пидора ответ!;Говна пакет!;Покукешай винегрет!;Купи у бабки табурет!.
         /// </summary>
         public static string нет {
             get {
@@ -124,11 +142,29 @@ namespace WfpBotConsole.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ф.
+        /// </summary>
+        public static string ф {
+            get {
+                return ResourceManager.GetString("ф", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Хуй з&apos;їв нашо?.
         /// </summary>
         public static string шо {
             get {
                 return ResourceManager.GetString("шо", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Та нишо....
+        /// </summary>
+        public static string шо_вы {
+            get {
+                return ResourceManager.GetString("шо вы", resourceCulture);
             }
         }
     }
