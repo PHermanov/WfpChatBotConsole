@@ -133,6 +133,24 @@ namespace WfpBotConsole.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Та нишо....
+        /// </summary>
+        public static string ну_шо_вы {
+            get {
+                return ResourceManager.GetString("ну шо вы", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вилы ему в зад!.
+        /// </summary>
+        public static string пидор {
+            get {
+                return ResourceManager.GetString("пидор", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Джигурда! 🧔.
         /// </summary>
         public static string пизда {

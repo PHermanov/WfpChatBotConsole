@@ -141,6 +141,12 @@
   <data name="нет" xml:space="preserve">
     <value>Пидора ответ!;Говна пакет!;Покукешай винегрет!;Купи у бабки табурет!</value>
   </data>
+  <data name="ну шо вы" xml:space="preserve">
+    <value>Та нишо...</value>
+  </data>
+  <data name="пидор" xml:space="preserve">
+    <value>Вилы ему в зад!</value>
+  </data>
   <data name="пизда" xml:space="preserve">
     <value>Джигурда! 🧔</value>
   </data>
