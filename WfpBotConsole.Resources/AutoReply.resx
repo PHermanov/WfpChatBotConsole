@@ -141,7 +141,7 @@
   <data name="нет" xml:space="preserve">
     <value>Пидора ответ!;Говна пакет!;Покукешай винегрет!;Купи у бабки табурет!</value>
   </data>
-  <data name="ну шо вы" xml:space="preserve">
+  <data name="нушовы" xml:space="preserve">
     <value>Та нишо...</value>
   </data>
   <data name="пидор" xml:space="preserve">
@@ -156,7 +156,7 @@
   <data name="шо" xml:space="preserve">
     <value>Хуй з'їв нашо?</value>
   </data>
-  <data name="шо вы" xml:space="preserve">
+  <data name="шовы" xml:space="preserve">
     <value>Та нишо...</value>
   </data>
 </root>

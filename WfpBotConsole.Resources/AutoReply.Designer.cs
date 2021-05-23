@@ -135,9 +135,9 @@ namespace WfpBotConsole.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Та нишо....
         /// </summary>
-        public static string ну_шо_вы {
+        public static string нушовы {
             get {
-                return ResourceManager.GetString("ну шо вы", resourceCulture);
+                return ResourceManager.GetString("нушовы", resourceCulture);
             }
         }
         
@@ -180,9 +180,9 @@ namespace WfpBotConsole.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Та нишо....
         /// </summary>
-        public static string шо_вы {
+        public static string шовы {
             get {
-                return ResourceManager.GetString("шо вы", resourceCulture);
+                return ResourceManager.GetString("шовы", resourceCulture);
             }
         }
     }
