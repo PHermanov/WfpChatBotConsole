@@ -135,11 +135,14 @@
   <data name="да" xml:space="preserve">
     <value>Пизда!;Пидора еда!</value>
   </data>
+  <data name="дауж" xml:space="preserve">
+    <value>Пиздауж!</value>
+  </data>
   <data name="не" xml:space="preserve">
     <value>🤚🏿💩</value>
   </data>
   <data name="нет" xml:space="preserve">
-    <value>Пидора ответ!;Говна пакет!;Покукешай винегрет!</value>
+    <value>Пидора ответ!;Говна пакет!</value>
   </data>
   <data name="нушовы" xml:space="preserve">
     <value>Та нишо...</value>
@@ -152,6 +155,9 @@
   </data>
   <data name="пизда" xml:space="preserve">
     <value>Джигурда! 🧔</value>
+  </data>
+  <data name="такшо" xml:space="preserve">
+    <value>Та всё хорошо</value>
   </data>
   <data name="ф" xml:space="preserve">
     <value>Ф</value>
