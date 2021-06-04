@@ -27,7 +27,7 @@ namespace WfpBotConsole.Services
 
 		public async Task AutoReplyAsync(Message message)
 		{
-			var preparedText = new Regex("[ .!?]")
+			var preparedText = new Regex("[^а-яА-Яa-zA-Z]")
 				.Replace(message.Text, string.Empty)
 				.ToLower();
 
