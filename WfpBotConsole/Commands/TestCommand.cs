@@ -35,8 +35,8 @@ namespace WfpBotConsole.Commands
             //await _telegramBotClient.TrySendTextMessageAsync(chatId, $"Хуест!", ParseMode.Markdown);
             //await _telegramBotClient.TrySendStickerAsync(chatId, StickersSelector.SelectRandomFromSet(StickersSelector.SticketSet.Yoba));
 
-            var monthJob = new MonthWinnerJob(_gameRepository, _telegramBotClient); 
-            monthJob.Execute();
+            //var monthJob = new MonthWinnerJob(_gameRepository, _telegramBotClient); 
+            //monthJob.Execute();
 
             //var aprilJob = new FoolsDayJob(_gameRepository, _telegramBotClient);
             //await aprilJob.Execute(chatId);

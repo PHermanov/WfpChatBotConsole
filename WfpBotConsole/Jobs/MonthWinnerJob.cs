@@ -48,7 +48,17 @@ namespace WfpBotConsole.Jobs
                         var mention = monthWinner.GetUserMention();
                         var message = $"{Messages.MonthWinner}{Environment.NewLine}\u269C {mention} \u269C{Environment.NewLine}{Messages.Congrats}";
 
-                        var userProfilePhotos = await _client.GetUserProfilePhotosAsync(monthWinner.UserId);
+                        UserProfilePhotos userProfilePhotos = null;
+
+                        try
+                        {
+                            userProfilePhotos = await _client.GetUserProfilePhotosAsync(monthWinner.UserId);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e);
+                        }
+                            
                         using var winnerImage = await GetWinnerImage(userProfilePhotos);
 
                         await _client.TrySendPhotoAsync(chatIds[i], new InputOnlineFile(winnerImage), message, ParseMode.Markdown);
@@ -73,7 +83,7 @@ namespace WfpBotConsole.Jobs
 
             var winnerImageStream = new MemoryStream();
 
-            if (userProfilePhotos.Photos.Any())
+            if (userProfilePhotos != null && userProfilePhotos.Photos.Any())
             {
                 var photoSize = userProfilePhotos.Photos[0]
                     .OrderByDescending(p => p.Height)
